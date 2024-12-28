@@ -10,11 +10,11 @@ export default defineConfig({
     lib: {
       entry: resolve(__dirname, 'src/main.jsx'),
       name: 'FairProtocol',
-      formats: ['iife'],  // Changed from 'es' to 'iife'
+      formats: ['es'],
       fileName: 'fair-protocol'
     },
     rollupOptions: {
-      external: [],  // Remove external config
+      external: ['react', 'react-dom'],
       output: {
         globals: {
           react: 'React',

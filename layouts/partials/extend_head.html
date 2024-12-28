@@ -17,7 +17,7 @@
   <script type="module" src="http://localhost:5173/src/main.jsx"></script>
 {{ else }}
   <!-- Production -->
-  <script src="https://unpkg.com/react@18/umd/react.production.min.js" crossorigin></script>
-  <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js" crossorigin></script>
-  <script src="/dist/fair-protocol.js"></script>
+  <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+  <script type="module" src="/dist/fair-protocol.js"></script>
 {{ end }}
