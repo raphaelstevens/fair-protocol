@@ -3,11 +3,12 @@ import react from '@vitejs/plugin-react';
 import { resolve } from 'path';
 
 export default defineConfig({
-  plugins: [
-    react({
-      jsxRuntime: 'automatic'
-    })
-  ],
+  plugins: [react()],
+  define: {
+    'process.env.NODE_ENV': '"production"',
+    'process.env': '{}',
+    'process': '{}',
+  },
   build: {
     outDir: 'dist',
     emptyOutDir: true,
@@ -18,14 +19,18 @@ export default defineConfig({
       fileName: 'fair-protocol'
     },
     rollupOptions: {
-      external: [],  // Ne rien externaliser
+      external: ['react', 'react-dom'],
       output: {
-        format: 'es',
-        inlineDynamicImports: true
+        globals: {
+          react: 'React',
+          'react-dom': 'ReactDOM'
+        }
       }
     }
   },
-  optimizeDeps: {
-    include: ['react', 'react-dom']
+  resolve: {
+    alias: {
+      '@': resolve(__dirname, './src'),
+    },
   }
 });
