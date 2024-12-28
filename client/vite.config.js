@@ -3,7 +3,11 @@ import react from '@vitejs/plugin-react';
 import { resolve } from 'path';
 
 export default defineConfig({
-  plugins: [react()],
+  plugins: [
+    react({
+      jsxRuntime: 'automatic'
+    })
+  ],
   build: {
     outDir: 'dist',
     emptyOutDir: true,
@@ -14,18 +18,14 @@ export default defineConfig({
       fileName: 'fair-protocol'
     },
     rollupOptions: {
-      external: ['react', 'react-dom'],
+      external: [],  // Ne rien externaliser
       output: {
-        globals: {
-          react: 'React',
-          'react-dom': 'ReactDOM'
-        }
+        format: 'es',
+        inlineDynamicImports: true
       }
     }
   },
-  resolve: {
-    alias: {
-      '@': resolve(__dirname, './src'),
-    },
+  optimizeDeps: {
+    include: ['react', 'react-dom']
   }
 });
