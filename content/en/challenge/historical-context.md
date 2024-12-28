@@ -15,6 +15,7 @@ The 1973 oil crisis provides a particularly instructive example of both vulnerab
 
 This interconnection between energy and agricultural markets continues to shape our economic vulnerability, as illustrated by recent price dynamics:
 
+{{< react component="PriceAnalysisDashboard" props="{}" >}}
 
 This visualization of normalized prices reveals how tightly coupled ammonia (key for fertilizers) remains to natural gas prices, while the European carbon market (ETS) shows limited influence on these strategic commodities. To better understand these relationships:
 
@@ -27,6 +28,6 @@ Denmark's response to the 1973 crisis offers a powerful model of successful tran
 
 Historical data reveals an inseparable connection between energy and food security. During major energy disruptions, prices of key agricultural products, particularly ammonia-based fertilizers, spike dramatically. These price increases cascade through the food production system, affecting agricultural productivity and ultimately leading to food price inflation. The impact is particularly severe in vulnerable regions, where energy and food insecurity can trigger broader social instability.
 
-{{< react component="PriceAnalysisDashboard" >}}
+
 
 Today's challenge differs in scale but not in fundamental nature from previous transitions. The FAIR Protocol builds on these historical lessons, offering a systematic approach to manage our current transition. It recognizes that, just as in past transitions, success depends on creating frameworks that align economic incentives with strategic necessities.
