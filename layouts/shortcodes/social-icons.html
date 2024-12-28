@@ -1,0 +1,33 @@
+{{/* layouts/shortcodes/social-icons.html */}}
+{{ $size := .Get "size" | default "24" }}
+
+<div class="social-icons">
+    <a href="https://fr.linkedin.com/in/jean-valayer-60733b238" class="icon-container" aria-label="LinkedIn Profile" target="_blank" rel="noopener noreferrer">
+        {{ $iconPath := "static/icons/linkedin.svg" }}
+        {{ with os.ReadFile $iconPath }}
+        <span class="icon icon-linkedin" style="width: {{ $size }}px; height: {{ $size }}px;">
+            {{ . | safeHTML }}
+        </span>
+        {{ end }}
+    </a>
+
+    <a href="mailto:valayerjean@gmail.com" class="icon-container" aria-label="Send email">
+        {{ $iconPath := "static/icons/mail.svg" }}
+        {{ with os.ReadFile $iconPath }}
+        <span class="icon icon-mail" style="width: {{ $size }}px; height: {{ $size }}px;">
+            {{ . | safeHTML }}
+        </span>
+        {{ end }}
+    </a>
+
+
+    <a href="https://github.com/raphaelstevens/fair-protocol" class="icon-container" aria-label="GitHub Profile" target="_blank" rel="noopener noreferrer">
+        {{ $iconPath := "static/icons/github.svg" }}
+        {{ with os.ReadFile $iconPath }}
+        <span class="icon icon-github" style="width: {{ $size }}px; height: {{ $size }}px;">
+            {{ . | safeHTML }}
+        </span>
+        {{ end }}
+    </a>
+
+</div>

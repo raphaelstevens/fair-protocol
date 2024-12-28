@@ -1,0 +1,101 @@
+baseURL: "https://fair-protocol.netlify.app/"
+title: "FAIR Protocol"
+theme: "PaperMod"
+
+defaultContentLanguage: en
+languages:
+  en:
+    languageName: "English"
+    weight: 1
+    menu:
+      main:
+        - identifier: challenge
+          name: Challenge
+          url: /en/challenge/
+          weight: 10
+        - identifier: solution
+          name: Solution
+          url: /en/solution/
+          weight: 20
+        - identifier: implementation
+          name: Implementation
+          url: /en/implementation/
+          weight: 30
+        - identifier: technical
+          name: Technical Corner
+          url: /en/technical/
+          weight: 40
+  fr:
+    languageName: "Français"
+    weight: 2
+    menu:
+      main:
+        - identifier: challenge
+          name: Le Défi
+          url: /fr/challenge/
+          weight: 10
+        - identifier: solution
+          name: La Solution
+          url: /fr/solution/
+          weight: 20
+        - identifier: implementation
+          name: Implémentation
+          url: /fr/implementation/
+          weight: 30
+        - identifier: technical
+          name: Aspect Technique
+          url: /fr/technical/
+          weight: 40
+
+params:
+  defaultTheme: auto
+  ShowReadingTime: true
+  ShowShareButtons: true
+  ShowBreadCrumbs: true
+  ShowPostNavLinks: true
+  ShowCodeCopyButtons: true
+  
+  homePageStyle: "simple"
+  homePageDisablePosts: true
+  disableSpecials: true
+  
+  hideAuthor: true
+  hideMeta: true
+  hideEntryNavigation: true
+  hideSummary: true
+
+
+  linkedin: "https://www.linkedin.com/in/your-profile"
+  github: "https://github.com/your-profile"
+  email: "your@email.com"
+
+  
+  homeInfoParams:
+    Title: "FAIR Protocol"
+    Content: "An innovative financial mechanism for energy transition"
+
+
+  assets:
+    css: 
+      - css/custom-theme.css
+
+  # Header settings
+  ShowBreadCrumbs: true
+  ShowPostNavLinks: true
+  ShowCodeCopyButtons: true
+  
+  # Content settings
+  ShowReadingTime: false
+  ShowShareButtons: false
+  ShowToc: true
+  
+  # Footer settings
+  ShowPostNavLinks: true
+
+
+markup:
+  goldmark:
+    renderer:
+      unsafe: true
+
+

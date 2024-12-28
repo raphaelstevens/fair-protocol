@@ -1,0 +1,38 @@
+{{ define "main" }}
+<main class="main">
+    <article class="post-single">
+        <!-- Ajout des breadcrumbs -->
+        {{ if (.Param "ShowBreadCrumbs" | default true) }}
+        <div class="breadcrumbs">
+            {{- $url := replace .RelPermalink (printf "/%s/" .Language.Lang) "/" }}
+            <a href="{{ "" | absLangURL }}">{{ i18n "home" | default "Home" }}</a>
+            {{- $scratch := newScratch }}
+            {{- range $index, $element := split $url "/" }}
+                {{- $scratch.Add "path" (printf "/%s" $element) }}
+                {{- if and $element (ne $element "page") }}
+                    &nbsp;»&nbsp;
+                    <a href="{{ ($scratch.Get "path") | absLangURL }}">
+                        {{- if eq (anchorize $element) (anchorize $.Title) }}
+                            {{ $.Title }}
+                        {{- else }}
+                            {{ humanize (replace $element "-" " ") }}
+                        {{- end }}
+                    </a>
+                {{- end }}
+            {{- end }}
+        </div>
+        {{ end }}
+
+        <header class="post-header">
+            <h1 class="post-title">{{ .Title }}</h1>
+            {{ if .Description }}
+            <div class="post-description">{{ .Description }}</div>
+            {{ end }}
+        </header>
+
+        <div class="post-content">
+            {{ .Content }}
+        </div>
+    </article>
+</main>
+{{ end }}

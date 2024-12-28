@@ -1,0 +1,16 @@
+[build]
+  publish = "public"
+  command = "hugo --minify"
+
+[context.production.environment]
+  HUGO_ENV = "production"
+  HUGO_VERSION = "0.139.4"
+
+[build.deploy]
+  base = "/"
+
+[[redirects]]
+  from = "/.netlify/*"
+  to = "https://www.fair-protocol.netlify.app/:splat"
+  status = 301
+  force = true

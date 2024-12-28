@@ -1,0 +1,17 @@
+{{/* layouts/shortcodes/icon.html */}}
+{{ $icon := .Get "icon" }}
+{{ $size := .Get "size" | default "24" }}
+{{ $color := .Get "color" | default "var(--primary)" }}
+
+<span class="icon-wrapper">
+    {{ $iconPath := print "static/icons/" $icon ".svg" }}
+    {{ with os.ReadFile $iconPath }}
+        <span class="icon icon-{{ $icon }}">
+            {{ . | replaceRE `width="[^"]+"` (print `width="` $size `"`) |
+                 replaceRE `height="[^"]+"` (print `height="` $size `"`) |
+                 replaceRE `stroke="[^"]+"` (print `stroke="` $color `"`) |
+                 replaceRE `stroke-width="[^"]+"` `stroke-width="2"` |
+                 safeHTML }}
+        </span>
+    {{ end }}
+</span>

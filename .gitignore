@@ -1,0 +1,20 @@
+# Fichiers générés par Hugo
+/public/
+
+# Dossiers et fichiers générés par npm
+/node_modules/
+npm-debug.log
+package-lock.json
+
+# Fichiers de configuration locaux de Hugo
+/config.toml
+/config.yaml
+/config.json
+
+# Fichiers de configuration spécifiques aux IDEs et éditeurs
+.idea/
+.vscode/
+
+# Fichiers temporaires de système
+.DS_Store
+Thumbs.db
