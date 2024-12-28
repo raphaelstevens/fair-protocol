@@ -4,14 +4,4 @@
   data-react-component="{{ .Get "component" }}"
   data-props='{{ .Get "props" | default "{}" }}'
   style="min-height: 400px; width: 100%;"
->
-  <!-- Loading state -->
-  <div style="text-align: center; padding: 20px;">
-    Loading {{ .Get "component" }}...
-  </div>
-</div>
-
-<!-- Debug info -->
-<script>
-console.log('React mount point created:', '{{ .Get "component" }}');
-</script>
+></div>

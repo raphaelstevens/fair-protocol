@@ -3,29 +3,18 @@ import react from '@vitejs/plugin-react';
 import { resolve } from 'path';
 
 export default defineConfig({
-  plugins: [
-    react({
-      fastRefresh: true,
-      // Ajout de la configuration pour le plugin React
-      include: "**/*.{jsx,tsx}",
-    })
-  ],
-  server: {
-    cors: true,
-    strictPort: true,
-    port: 5173,
-  },
+  plugins: [react()],
   build: {
     outDir: 'dist',
     emptyOutDir: true,
     lib: {
       entry: resolve(__dirname, 'src/main.jsx'),
       name: 'FairProtocol',
-      formats: ['es'],
+      formats: ['iife'],  // Changed from 'es' to 'iife'
       fileName: 'fair-protocol'
     },
     rollupOptions: {
-      external: ['react', 'react-dom'],
+      external: [],  // Remove external config
       output: {
         globals: {
           react: 'React',
