@@ -74,10 +74,9 @@ params:
     Title: "FAIR Protocol"
     Content: "An innovative financial mechanism for energy transition"
 
-
   assets:
     css: 
-      - css/custom-theme.css
+      - /css/custom-theme.css
 
   # Header settings
   ShowBreadCrumbs: true
