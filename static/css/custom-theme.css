@@ -1,0 +1,218 @@
+/* ==========================================================================
+   Variables du thème - Mode clair
+   ========================================================================== */
+:root {
+    /* Couleurs de base du thème */
+    --theme: #F8F9FA;          /* Fond clair et neutre */
+    --entry: #E6EEF4;          /* Surface des cartes, légèrement bleutée */
+    --primary: #1B365D;        /* Texte principal, bleu profond */
+    --secondary: #4A5568;      /* Texte secondaire, gris neutre */
+    --tertiary: #E6EEF4;       /* Accents tertiaires */
+    --content: #1B365D;        /* Couleur principale du contenu */
+
+    /* Variables sémantiques pour les icônes */
+    --icon-info: #4A90E2;        /* Bleu information */
+    --icon-challenge: #D43C3C;   /* Rouge challenge/alerte */
+    --icon-solution: #5BAE6E;    /* Vert solution */
+    --icon-implementation: #4A90E2; /* Bleu process */
+    --icon-technical: #DAC04A;   /* Jaune technique */
+    --icon-indigo: #6473B3;      /* Indigo */
+    --icon-violet: #9967C4;      /* Violet */
+
+    /* Utilitaires */
+    --hljs-bg: #E6EEF4;         /* Arrière-plan code */
+    --code-bg: #E6EEF4;         /* Arrière-plan code inline */
+    --border: #E6EEF4;          /* Couleur des bordures */
+}
+
+/* ==========================================================================
+   Variables du thème - Mode sombre
+   ========================================================================== */
+:root[data-theme="dark"],
+.dark {
+    /* Couleurs de base du thème */
+    --theme: #111827;         /* Fond sombre */
+    --entry: #1A2634;         /* Surface des cartes */
+    --primary: #F8F9FA;       /* Texte principal */
+    --secondary: #A0AEB9;     /* Texte secondaire */
+    --tertiary: #1A2634;      /* Accents tertiaires */
+    --content: #F8F9FA;       /* Couleur principale du contenu */
+
+    /* Variables sémantiques pour les icônes */
+    --icon-info: #5BA4D8;       /* Bleu information */
+    --icon-challenge: #E57373;  /* Rouge challenge/alerte */
+    --icon-solution: #69C17C;   /* Vert solution */
+    --icon-implementation: #5BA4D8; /* Bleu process */
+    --icon-technical: #E2C94D;  /* Jaune technique */
+    --icon-indigo: #7681C7;     /* Indigo */
+    --icon-violet: #A47DCB;     /* Violet */
+
+    /* Utilitaires */
+    --hljs-bg: #1A2634;         /* Arrière-plan code */
+    --code-bg: #1A2634;         /* Arrière-plan code inline */
+    --border: #A0AEB9;          /* Couleur des bordures */
+}
+
+/* ==========================================================================
+   Styles globaux
+   ========================================================================== */
+.list {
+    background: var(--theme) !important;
+}
+
+.dark.list {
+    background: var(--theme) !important;
+}
+
+/* ==========================================================================
+   Typographie
+   ========================================================================== */
+/* Titre principal */
+.post-title,
+.post-content h1,
+h1 {
+    font-weight: 700 !important;
+    color: var(--primary) !important;
+    font-size: 40px !important;
+    margin-bottom: 2px !important;
+}
+
+/* Titres secondaires */
+.post-content h2,
+h2 {
+    font-weight: 700 !important;
+    color: var(--primary) !important;
+    font-size: 32px !important;
+    margin: 32px auto 24px !important;
+}
+
+/* Titres tertiaires */
+.post-content h3,
+h3,
+.info-header h3 {
+    font-weight: 700 !important;
+    color: var(--primary) !important;
+    font-size: 24px !important;
+    margin-bottom: 0 !important;
+}
+
+/* ==========================================================================
+   Composants - Icônes
+   ========================================================================== */
+/* Conteneur d'icône */
+.icon-wrapper {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 0;
+}
+
+/* Icône de base */
+.icon {
+    display: inline-block;
+}
+
+/* Classes spécifiques pour les icônes */
+.icon-info,
+.icon-clock { 
+    color: var(--icon-info) !important; 
+}
+
+.icon-triangle-alert,
+.icon-thermometer,
+.icon-alert-circle { 
+    color: var(--icon-challenge) !important; 
+}
+
+.icon-shield-check { 
+    color: var(--icon-solution) !important; 
+}
+
+.icon-git-merge,
+.icon-between-vertical-start { 
+    color: var(--icon-implementation) !important; 
+}
+
+.icon-file-code-2,
+.icon-chart-column-stacked { 
+    color: var(--icon-technical) !important; 
+}
+
+.icon-chart-column-stacked { 
+    color: var(--icon-indigo) !important; 
+}
+
+.icon-clock { 
+    color: var(--icon-violet) !important; 
+}
+
+/* ==========================================================================
+   Composants - Sections
+   ========================================================================== */
+/* Section d'information */
+.home-info {
+    color: var(--primary);
+    padding: 20px;
+    margin: 20px auto;
+    max-width: 800px;
+    background: var(--entry);
+    border-radius: 8px;
+}
+
+/* En-tête de section */
+.info-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 20px;
+}
+
+.info-header h3 {
+    margin: 0;
+    color: var(--primary);
+}
+
+/* ==========================================================================
+   Composants - Navigation
+   ========================================================================== */
+/* Breadcrumbs */
+.breadcrumbs {
+    margin-bottom: 0rem;
+}
+
+/* Header de post */
+.post-header {
+    margin-top: 0;
+    margin-bottom: 2rem;
+}
+
+/* Ajustement du titre */
+.post-title {
+    margin-bottom: 1rem !important;
+}
+
+/* ==========================================================================
+   Composants - Icônes sociales
+   ========================================================================== */
+.social-icons {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    margin: 1rem 0;
+}
+
+.icon-container {
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    line-height: 0;
+    text-decoration: none !important;
+}
+
+.icon-container:hover {
+    opacity: 0.8;
+    transition: opacity 0.2s ease;
+    text-decoration: underline;
+}

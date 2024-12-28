@@ -11,8 +11,4 @@
   HUGO_VERSION = "0.139.4"
   NODE_VERSION = "18"
 
-[[redirects]]
-  from = "/*"
-  to = "/fair-protocol/:splat"
-  status = 301
-  force = true
+# Suppression de la redirection problématique

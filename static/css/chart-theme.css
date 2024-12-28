@@ -1,0 +1,165 @@
+/* ==========================================================================
+   Variables graphiques - Mode clair
+   ========================================================================== */
+:root {
+    /* Arrière-plan et texte - alignés avec le thème principal */
+    --chart-bg: var(--entry);          /* Même que les cartes */
+    --chart-title-text: var(--primary); /* Cohérence avec les titres */
+    --chart-subtitle-text: var(--secondary); /* Cohérence avec le texte secondaire */
+
+    /* Légende et infobulles */
+    --chart-legend-bg: var(--theme);    /* Fond plus clair */
+    --chart-legend-text: var(--primary);
+    --chart-legend-border: var(--tertiary);
+    --chart-tooltip-bg: var(--theme);
+    --chart-tooltip-text: var(--primary);
+    --chart-tooltip-border: var(--tertiary);
+
+    /* Axes et grille */
+    --chart-axis: var(--secondary);      /* Cohérence avec le texte secondaire */
+    --chart-axis-label: var(--primary);
+    --chart-grid: var(--tertiary);
+    --chart-zero-line: var(--icon-challenge); /* Réutilisation de la couleur d'alerte */
+    --chart-crosshair: var(--icon-implementation); /* Réutilisation de la couleur process */
+
+    /* Palettes de données - basées sur les couleurs sémantiques du thème */
+    --chart-line-1: var(--icon-info);           /* Bleu information */
+    --chart-line-2: var(--icon-implementation); /* Bleu process */
+    --chart-line-3: var(--icon-solution);       /* Vert solution */
+    --chart-line-4: var(--icon-challenge);      /* Rouge challenge */
+    --chart-line-5: var(--icon-technical);      /* Jaune technique */
+
+    /* Les couleurs de barres suivent la même logique */
+    --chart-bar-1: var(--icon-info);
+    --chart-bar-2: var(--icon-implementation);
+    --chart-bar-3: var(--icon-solution);
+    --chart-bar-4: var(--icon-challenge);
+    --chart-bar-5: var(--icon-technical);
+
+    /* Graphiques circulaires - ordre optimisé pour le contraste */
+    --chart-pie-slice-1: var(--icon-challenge); /* Rouge - plus visible */
+    --chart-pie-slice-2: var(--icon-info);      /* Bleu */
+    --chart-pie-slice-3: var(--icon-solution);  /* Vert */
+    --chart-pie-slice-4: var(--icon-technical); /* Jaune */
+    --chart-pie-slice-5: var(--secondary);      /* Gris */
+
+    /* Remplissages avec transparence */
+    --chart-area-fill-1: color-mix(in srgb, var(--icon-info) 20%, transparent);
+    --chart-area-fill-2: color-mix(in srgb, var(--icon-implementation) 20%, transparent);
+    --chart-area-fill-3: color-mix(in srgb, var(--icon-solution) 20%, transparent);
+
+    /* Éléments interactifs */
+    --chart-hover-bg: var(--tertiary);
+    --chart-selected-border: var(--icon-challenge);
+
+    /* Annotations */
+    --chart-annotation-line: var(--secondary);
+    --chart-annotation-bg: var(--theme);
+    --chart-annotation-text: var(--primary);
+
+    /* Zones interactives */
+    --chart-zoom-box-bg: color-mix(in srgb, var(--icon-implementation) 20%, transparent);
+    --chart-zoom-box-border: var(--icon-implementation);
+
+    /* Boutons et contrôles */
+    --chart-button-bg: var(--theme);
+    --chart-button-text: var(--primary);
+    --chart-button-bg-select: var(--primary);
+    --chart-button-text-select: var(--theme);
+}
+
+/* ==========================================================================
+   Variables graphiques - Mode sombre
+   ========================================================================== */
+:root[data-theme="dark"],
+.dark {
+    /* Arrière-plan et texte */
+    --chart-bg: var(--entry);
+    --chart-title-text: var(--primary);
+    --chart-subtitle-text: var(--secondary);
+
+    /* Légende et infobulles */
+    --chart-legend-bg: var(--theme);
+    --chart-legend-text: var(--primary);
+    --chart-legend-border: var(--tertiary);
+    --chart-tooltip-bg: var(--theme);
+    --chart-tooltip-text: var(--primary);
+    --chart-tooltip-border: var(--tertiary);
+
+    /* Axes et grille */
+    --chart-axis: var(--secondary);
+    --chart-axis-label: var(--primary);
+    --chart-grid: color-mix(in srgb, var(--secondary) 30%, transparent);
+
+    /* Les palettes de couleurs héritent automatiquement 
+       des versions sombres des icônes définies dans le thème principal */
+}
+
+/* ==========================================================================
+   Styles des graphiques
+   ========================================================================== */
+/* Container du graphique */
+.chart-container {
+    background: var(--chart-bg);
+    padding: 20px;
+    border-radius: 8px;
+    margin: 20px 0;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+/* Titres et légendes */
+.chart-title {
+    color: var(--chart-title-text);
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+.chart-subtitle {
+    color: var(--chart-subtitle-text);
+    font-size: 0.875rem;
+    margin-bottom: 1rem;
+}
+
+.chart-legend {
+    background: var(--chart-legend-bg);
+    color: var(--chart-legend-text);
+    padding: 0.5rem;
+    border-radius: 4px;
+    border: 1px solid var(--chart-legend-border);
+    font-size: 0.875rem;
+}
+
+/* Tooltips et interactions */
+.chart-tooltip {
+    background: var(--chart-tooltip-bg);
+    color: var(--chart-tooltip-text);
+    border: 1px solid var(--chart-tooltip-border);
+    padding: 0.5rem;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    font-size: 0.875rem;
+}
+
+/* Boutons de contrôle */
+.chart-button {
+    background: var(--chart-button-bg);
+    color: var(--chart-button-text);
+    border: 1px solid var(--chart-button-text);
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-size: 0.875rem;
+    font-weight: 500;
+}
+
+.chart-button:hover {
+    background: color-mix(in srgb, var(--chart-button-bg) 90%, var(--chart-button-text));
+}
+
+.chart-button.selected {
+    background: var(--chart-button-bg-select);
+    color: var(--chart-button-text-select);
+    border-color: var(--chart-button-bg-select);
+}
