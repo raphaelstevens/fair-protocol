@@ -15,7 +15,7 @@ The 1973 oil crisis provides a particularly instructive example of both vulnerab
 
 This interconnection between energy and agricultural markets continues to shape our economic vulnerability, as illustrated by recent price dynamics:
 
-{{< react component="PriceAnalysisDashboard" props="{}" >}}
+{{< react component="PriceAnalysisDashboard" >}}
 
 This visualization of normalized prices reveals how tightly coupled ammonia (key for fertilizers) remains to natural gas prices, while the European carbon market (ETS) shows limited influence on these strategic commodities. To better understand these relationships:
 
