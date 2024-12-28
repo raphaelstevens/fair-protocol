@@ -1,3 +1,25 @@
 {{/* layouts/partials/extend_head.html */}}
 {{- $customCSS := resources.Get "css/custom-theme.css" | minify -}}
 <link rel="stylesheet" href="{{ $customCSS.Permalink }}">
+
+{{ if hugo.IsServer }}
+  <!-- Development -->
+  <script type="module">
+    import RefreshRuntime from 'http://localhost:5173/@react-refresh'
+    RefreshRuntime.injectIntoGlobalHook(window)
+    window.$RefreshReg$ = () => {}
+    window.$RefreshSig$ = () => (type) => type
+    window.__vite_plugin_react_preamble_installed__ = true
+  </script>
+  <script type="module" src="http://localhost:5173/@vite/client"></script>
+  <script type="module" src="http://localhost:5173/src/main.jsx"></script>
+{{ else }}
+  <!-- Production -->
+  {{ $manifest := resources.Get "dist/manifest.json" }}
+  {{ if $manifest }}
+    {{ $manifestContent := $manifest.Content | unmarshal }}
+    {{ with index $manifestContent.files "main.js" }}
+      <script type="module" src="/dist/{{ .file }}"></script>
+    {{ end }}
+  {{ end }}
+{{ end }}

@@ -1,10 +1,15 @@
 [build]
   publish = "public"
-  command = "hugo --minify"
+  command = "cd client && npm install && npm run build && cd .. && hugo --minify"
 
 [context.production.environment]
   HUGO_ENV = "production"
   HUGO_VERSION = "0.139.4"
+  NODE_VERSION = "18"
+
+[build.environment]
+  HUGO_VERSION = "0.139.4"
+  NODE_VERSION = "18"
 
 [build.deploy]
   base = "/"

@@ -1,0 +1,8 @@
+{{/* layouts/shortcodes/react.html */}}
+{{ $component := .Get "component" }}
+{{ $props := .Get "props" | default "{}" }}
+
+<div 
+  data-react-component="{{ $component }}"
+  data-props="{{ $props }}"
+></div>
