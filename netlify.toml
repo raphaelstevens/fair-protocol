@@ -11,11 +11,8 @@
   HUGO_VERSION = "0.139.4"
   NODE_VERSION = "18"
 
-[build.deploy]
-  base = "/"
-
 [[redirects]]
-  from = "/.netlify/*"
-  to = "https://www.fair-protocol.netlify.app/:splat"
+  from = "/*"
+  to = "/fair-protocol/:splat"
   status = 301
   force = true
