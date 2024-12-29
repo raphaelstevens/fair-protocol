@@ -4,6 +4,14 @@ import { resolve } from 'path';
 
 export default defineConfig({
   plugins: [react()],
+  define: {
+    'global': 'globalThis',
+    'process': {
+      'env': {
+        'NODE_ENV': JSON.stringify('production')
+      }
+    }
+  },
   build: {
     outDir: '../static/dist',
     emptyOutDir: true,
@@ -19,14 +27,16 @@ export default defineConfig({
         }
       },
       external: ['react', 'react-dom']
-    },
-    cssCodeSplit: false,
-    // Assurez-vous que le CSS est extrait dans un fichier séparé
-    cssMinify: true
+    }
   },
   resolve: {
     alias: {
       '@': resolve(__dirname, './src'),
+    },
+  },
+  server: {
+    watch: {
+      usePolling: true,
     },
   }
 });
