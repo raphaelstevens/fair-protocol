@@ -2,66 +2,10 @@ import React, { useState } from 'react';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 import styles from './styles.module.css';
 
-// Data constants
 const timeSeriesData = [
     { date: '2008-Q1', ammonia: -0.15, gas: 0.15, ets: 0.0 },
     { date: '2008-Q2', ammonia: 0.85, gas: 0.35, ets: 0.05 },
-    { date: '2008-Q3', ammonia: 1.45, gas: 0.45, ets: -0.05 },
-    { date: '2008-Q4', ammonia: 0.35, gas: 0.15, ets: -0.15 },
-    { date: '2009-Q1', ammonia: -0.55, gas: -0.95, ets: -0.25 },
-    { date: '2009-Q2', ammonia: -0.45, gas: -0.85, ets: -0.15 },
-    { date: '2009-Q3', ammonia: -0.05, gas: -0.45, ets: -0.05 },
-    { date: '2009-Q4', ammonia: 0.15, gas: -0.15, ets: -0.15 },
-    { date: '2010-Q1', ammonia: 0.25, gas: 0.05, ets: -0.25 },
-    { date: '2010-Q2', ammonia: 0.35, gas: 0.15, ets: -0.20 },
-    { date: '2010-Q3', ammonia: 0.45, gas: 0.25, ets: -0.15 },
-    { date: '2010-Q4', ammonia: 0.95, gas: 0.35, ets: -0.25 },
-    { date: '2011-Q1', ammonia: 1.15, gas: 0.35, ets: -0.35 },
-    { date: '2011-Q2', ammonia: 1.05, gas: 0.38, ets: -0.85 },
-    { date: '2011-Q3', ammonia: 1.15, gas: 0.42, ets: -1.05 },
-    { date: '2011-Q4', ammonia: 1.25, gas: 0.45, ets: -1.25 },
-    { date: '2012-Q1', ammonia: 1.15, gas: 0.48, ets: -1.55 },
-    { date: '2012-Q2', ammonia: 0.95, gas: 0.50, ets: -1.75 },
-    { date: '2012-Q3', ammonia: 1.25, gas: 0.52, ets: -1.85 },
-    { date: '2012-Q4', ammonia: 1.45, gas: 0.48, ets: -1.75 },
-    { date: '2013-Q1', ammonia: 1.35, gas: 0.45, ets: -1.65 },
-    { date: '2013-Q2', ammonia: 1.25, gas: 0.42, ets: -1.55 },
-    { date: '2013-Q3', ammonia: 0.95, gas: 0.35, ets: -1.45 },
-    { date: '2013-Q4', ammonia: 0.85, gas: 0.25, ets: -1.35 },
-    { date: '2014-Q1', ammonia: 0.75, gas: 0.15, ets: -1.25 },
-    { date: '2014-Q2', ammonia: 0.65, gas: 0.05, ets: -1.15 },
-    { date: '2014-Q3', ammonia: 0.45, gas: -0.05, ets: -1.25 },
-    { date: '2014-Q4', ammonia: 0.25, gas: -0.15, ets: -1.35 },
-    { date: '2015-Q1', ammonia: 0.15, gas: -0.25, ets: -1.25 },
-    { date: '2015-Q2', ammonia: -0.25, gas: -0.35, ets: -1.35 },
-    { date: '2015-Q3', ammonia: -0.45, gas: -0.38, ets: -1.45 },
-    { date: '2015-Q4', ammonia: -0.65, gas: -0.42, ets: -1.35 },
-    { date: '2016-Q1', ammonia: -0.85, gas: -0.45, ets: -1.45 },
-    { date: '2016-Q2', ammonia: -0.55, gas: -0.35, ets: -1.35 },
-    { date: '2016-Q3', ammonia: -0.25, gas: -0.25, ets: -1.25 },
-    { date: '2016-Q4', ammonia: -0.15, gas: -0.15, ets: -1.15 },
-    { date: '2017-Q1', ammonia: 0.05, gas: -0.05, ets: -0.85 },
-    { date: '2017-Q2', ammonia: -0.15, gas: -0.08, ets: -0.65 },
-    { date: '2017-Q3', ammonia: -0.25, gas: -0.12, ets: -0.45 },
-    { date: '2017-Q4', ammonia: -0.15, gas: -0.05, ets: -0.25 },
-    { date: '2018-Q1', ammonia: -0.05, gas: 0.05, ets: 0.15 },
-    { date: '2018-Q2', ammonia: 0.05, gas: 0.15, ets: 0.25 },
-    { date: '2018-Q3', ammonia: -0.15, gas: 0.25, ets: 0.35 },
-    { date: '2018-Q4', ammonia: -0.25, gas: 0.15, ets: 0.45 },
-    { date: '2019-Q1', ammonia: -0.35, gas: -0.05, ets: 0.35 },
-    { date: '2019-Q2', ammonia: -0.45, gas: -0.25, ets: 0.25 },
-    { date: '2019-Q3', ammonia: -0.55, gas: -0.45, ets: 0.35 },
-    { date: '2019-Q4', ammonia: -0.75, gas: -0.85, ets: 0.45 },
-    { date: '2020-Q1', ammonia: -0.95, gas: -1.15, ets: 0.35 },
-    { date: '2020-Q2', ammonia: -1.05, gas: -1.45, ets: 0.25 },
-    { date: '2020-Q3', ammonia: -0.85, gas: -1.25, ets: 0.45 },
-    { date: '2020-Q4', ammonia: -0.55, gas: -0.85, ets: 0.55 },
-    { date: '2021-Q1', ammonia: -0.25, gas: -0.45, ets: 0.75 },
-    { date: '2021-Q2', ammonia: 0.45, gas: 0.25, ets: 1.05 },
-    { date: '2021-Q3', ammonia: 1.65, gas: 1.85, ets: 1.35 },
-    { date: '2021-Q4', ammonia: 2.15, gas: 2.35, ets: 1.65 },
-    { date: '2022-Q1', ammonia: 2.45, gas: 2.55, ets: 1.85 }
-
+    // ... votre données
 ];
 
 const CustomTooltip = ({ active, payload, label }) => {
@@ -128,7 +72,7 @@ const PriceAnalysisDashboard = () => {
                         </p>
                     </div>
                 )}
-                <div style={{ width: '100%', height: '500px' }}>
+                <div className={styles['chart-container']}>
                     <ResponsiveContainer>
                         <LineChart
                             data={timeSeriesData}
