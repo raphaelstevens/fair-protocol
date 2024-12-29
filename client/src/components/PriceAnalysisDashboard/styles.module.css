@@ -100,14 +100,9 @@
 
 
 
-
-
-
-
-
-
-
-/* Conteneurs principaux */
+/* ==========================================================================
+   Composants principaux
+   ========================================================================== */
 .card {
   width: 100%;
   box-shadow: none;
@@ -123,6 +118,7 @@
 
 .card-title {
   color: var(--chart-title-text);
+  margin-bottom: 0.5rem;
 }
 
 .card-content {
@@ -131,13 +127,28 @@
   gap: 1rem;
 }
 
-/* Boutons */
+/* ==========================================================================
+   Conteneur du graphique
+   ========================================================================== */
+.chart-container {
+  height: 500px;
+  width: 100%;
+  background-color: var(--chart-bg);
+  padding: 20px;
+  border-radius: 8px;
+  margin: 20px 0;
+}
+
+/* ==========================================================================
+   Boutons
+   ========================================================================== */
 .button {
   padding: 0.5rem 1rem;
   border-radius: 0.375rem;
   font-weight: 500;
   transition: opacity 0.3s;
   cursor: pointer;
+  border: none;
 }
 
 .button:hover {
@@ -154,7 +165,9 @@
   color: var(--chart-button-text);
 }
 
-/* Alertes */
+/* ==========================================================================
+   Alertes
+   ========================================================================== */
 .alert {
   background-color: var(--chart-annotation-bg);
   border: 1px solid var(--chart-annotation-line);
@@ -164,28 +177,37 @@
 
 .alert-description {
   color: var(--chart-annotation-text);
+  margin: 0;
 }
 
-/* Graphiques */
-.chart-container {
-  height: 500px;
-}
-
-/* Tooltips */
+/* ==========================================================================
+   Tooltip
+   ========================================================================== */
 .tooltip {
-  background-color: white;
+  background-color: var(--chart-tooltip-bg);
   padding: 1rem;
-  border: 1px solid #e5e7eb; /* Light gray border (tailwind: border-gray-200) */
+  border: 1px solid var(--chart-tooltip-border);
   border-radius: 0.375rem;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Tailwind shadow-lg */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .tooltip-title {
   font-weight: 600;
+  color: var(--chart-tooltip-text);
+  margin: 0 0 0.5rem 0;
 }
 
+.tooltip p {
+  margin: 0.25rem 0;
+  color: var(--chart-tooltip-text);
+}
+
+/* ==========================================================================
+   Texte
+   ========================================================================== */
 .text-right {
   text-align: right;
-  font-size: 0.75rem; /* Tailwind text-xs */
+  font-size: 0.75rem;
   color: var(--chart-subtitle-text);
+  margin: 0.5rem 0 0 0;
 }
