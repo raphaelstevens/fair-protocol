@@ -1,4 +1,3 @@
-
 /* ==========================================================================
    Composants principaux
    ========================================================================== */
@@ -33,9 +32,9 @@
   height: 500px;
   width: 100%;
   background-color: var(--chart-bg);
-  position: relative;  /* Ajouté */
-  display: flex;      /* Ajouté */
-  flex-direction: column; /* Ajouté */
+  padding: 20px;
+  border-radius: 8px;
+  margin: 20px 0;
 }
 
 /* ==========================================================================
