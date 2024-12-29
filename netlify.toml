@@ -6,8 +6,7 @@
     npm run build && \
     cd .. && \
     mkdir -p static/dist && \
-    cp client/dist/fair-protocol.js static/dist/ && \
-    cp client/dist/fair-protocol.js.map static/dist/ 2>/dev/null || true && \
+    cp -r client/dist/* static/dist/ && \
     hugo --minify
   """
 
