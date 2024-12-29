@@ -15,18 +15,20 @@ export default defineConfig({
   build: {
     outDir: '../static/dist',
     emptyOutDir: true,
+    lib: {
+      entry: resolve(__dirname, 'src/main.jsx'),
+      name: 'FairProtocol',
+      formats: ['es'],
+      fileName: 'fair-protocol'
+    },
     rollupOptions: {
-      input: resolve(__dirname, 'src/main.jsx'),
+      external: ['react', 'react-dom'],
       output: {
-        entryFileNames: 'fair-protocol.js',
-        format: 'iife',
-        name: 'FairProtocol',
         globals: {
           react: 'React',
           'react-dom': 'ReactDOM'
         }
-      },
-      external: ['react', 'react-dom']
+      }
     }
   },
   resolve: {
