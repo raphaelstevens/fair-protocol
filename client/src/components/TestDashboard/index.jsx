@@ -17,8 +17,7 @@ const TestDashboard = () => {
     windowKeys: Object.keys(window),
     hasResizeObserver: 'ResizeObserver' in window,
     hasRequestAnimationFrame: 'requestAnimationFrame' in window,
-    process: typeof process,
-    processEnv: typeof process?.env,
+    isDevelopment: import.meta.env.DEV
   });
 
   return (

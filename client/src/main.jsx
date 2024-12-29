@@ -1,6 +1,7 @@
 import React from 'react';
 import { createRoot } from 'react-dom/client';
 import PriceAnalysisDashboard from './components/PriceAnalysisDashboard';
+import TestDashboard from './components/TestDashboard';
 
 // Production debug helper
 const isProd = import.meta.env.PROD;
