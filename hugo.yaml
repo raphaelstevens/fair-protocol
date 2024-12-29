@@ -77,7 +77,6 @@ params:
   assets:
     css: 
       - css/custom-theme.css
-      - css/chart-theme.css
 
   # Header settings
   ShowBreadCrumbs: true

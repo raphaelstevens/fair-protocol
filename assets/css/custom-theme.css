@@ -23,6 +23,37 @@
     --hljs-bg: #E6EEF4;         /* Arrière-plan code */
     --code-bg: #E6EEF4;         /* Arrière-plan code inline */
     --border: #E6EEF4;          /* Couleur des bordures */
+
+    /* Variables pour les graphiques */
+    --chart-bg: var(--entry);
+    --chart-title-text: var(--primary);
+    --chart-subtitle-text: var(--secondary);
+    --chart-grid: #E2E8F0;
+
+    /* Axes */
+    --chart-axis: #718096;
+    --chart-axis-label: var(--primary);
+
+    /* Lignes du graphique */
+    --chart-line-1: #4A90E2;  /* Bleu pour ammonia */
+    --chart-line-2: #5BAE6E;  /* Vert pour gas */
+    --chart-line-3: #D43C3C;  /* Rouge pour ets */
+
+    /* Tooltip */
+    --chart-tooltip-bg: var(--entry);
+    --chart-tooltip-text: var(--primary);
+    --chart-tooltip-border: #E2E8F0;
+
+    /* Boutons */
+    --chart-button-bg: var(--entry);
+    --chart-button-text: var(--primary);
+    --chart-button-bg-select: var(--primary);
+    --chart-button-text-select: var(--entry);
+
+    /* Annotations et alertes */
+    --chart-annotation-bg: var(--tertiary);
+    --chart-annotation-line: var(--secondary);
+    --chart-annotation-text: var(--primary);
 }
 
 /* ==========================================================================
@@ -32,11 +63,11 @@
 .dark {
     /* Couleurs de base du thème */
     --theme: #111827;         /* Fond sombre */
-    --entry: #1A2634;         /* Surface des cartes */
-    --primary: #F8F9FA;       /* Texte principal */
-    --secondary: #A0AEB9;     /* Texte secondaire */
-    --tertiary: #1A2634;      /* Accents tertiaires */
-    --content: #F8F9FA;       /* Couleur principale du contenu */
+    --entry: #1F2937;         /* Surface des cartes */
+    --primary: #F9FAFB;       /* Texte principal */
+    --secondary: #9CA3AF;     /* Texte secondaire */
+    --tertiary: #374151;      /* Accents tertiaires */
+    --content: #F9FAFB;       /* Couleur principale du contenu */
 
     /* Variables sémantiques pour les icônes */
     --icon-info: #5BA4D8;       /* Bleu information */
@@ -51,7 +82,40 @@
     --hljs-bg: #1A2634;         /* Arrière-plan code */
     --code-bg: #1A2634;         /* Arrière-plan code inline */
     --border: #A0AEB9;          /* Couleur des bordures */
+
+    /* Variables pour les graphiques - version sombre */
+    --chart-bg: var(--entry);
+    --chart-title-text: var(--primary);
+    --chart-subtitle-text: var(--secondary);
+    --chart-grid: #374151;
+
+    /* Axes */
+    --chart-axis: #9CA3AF;
+    --chart-axis-label: var(--primary);
+
+    /* Lignes du graphique - versions plus claires pour le mode sombre */
+    --chart-line-1: #60A5FA;  /* Bleu plus clair */
+    --chart-line-2: #6EE7B7;  /* Vert plus clair */
+    --chart-line-3: #F87171;  /* Rouge plus clair */
+
+    /* Tooltip */
+    --chart-tooltip-bg: var(--entry);
+    --chart-tooltip-text: var(--primary);
+    --chart-tooltip-border: #374151;
+
+    /* Boutons */
+    --chart-button-bg: var(--entry);
+    --chart-button-text: var(--primary);
+    --chart-button-bg-select: var(--primary);
+    --chart-button-text-select: var(--entry);
+
+    /* Annotations et alertes */
+    --chart-annotation-bg: var(--tertiary);
+    --chart-annotation-line: var(--secondary);
+    --chart-annotation-text: var(--primary);
 }
+
+
 
 /* ==========================================================================
    Styles globaux
