@@ -44,7 +44,7 @@ const PriceAnalysisDashboard = () => {
 
     const renderTimeSeriesChart = () => (
         <div className={styles['chart-container']}>
-            <ResponsiveContainer>
+            <ResponsiveContainer width="100%" height="100%">
                 <LineChart
                     data={timeSeriesData}
                     margin={{ top: 20, right: 20, left: 20, bottom: 30 }}
