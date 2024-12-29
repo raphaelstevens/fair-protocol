@@ -1,3 +1,6 @@
+
+
+
 import React, { useState } from 'react';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 import styles from './styles.module.css';
@@ -63,160 +66,157 @@ const timeSeriesData = [
     { date: '2022-Q1', ammonia: 2.45, gas: 2.55, ets: 1.85 },
 
 ];
-
-
-// Theme object
+// Theme object (conservé tel quel)
 const theme = {
-  axes: {
-    axisColor: 'var(--chart-axis)',
-    axisLabel: 'var(--chart-axis-label)',
-    gridLines: 'var(--chart-grid)',
-    zeroLine: 'var(--chart-zero-line)',
-  },
-  data: {
-    primary: 'var(--chart-line-1)',
-    secondary: 'var(--chart-line-2)',
-    tertiary: 'var(--chart-line-3)',
-  }
+    axes: {
+        axisColor: 'var(--chart-axis)',
+        axisLabel: 'var(--chart-axis-label)',
+        gridLines: 'var(--chart-grid)',
+        zeroLine: 'var(--chart-zero-line)',
+    },
+    data: {
+        primary: 'var(--chart-line-1)',
+        secondary: 'var(--chart-line-2)',
+        tertiary: 'var(--chart-line-3)',
+    }
 };
 
-// Custom tooltip component
 const CustomTooltip = ({ active, payload, label }) => {
-  if (active && payload && payload.length) {
-    return (
-      <div className={styles.tooltip}>
-        <p className={styles['tooltip-title']}>{label}</p>
-        {payload.map((entry, index) => (
-          <p key={index} style={{ color: entry.color }}>
-            {entry.name}: {entry.value.toFixed(2)}
-          </p>
-        ))}
-      </div>
-    );
-  }
-  return null;
+    if (active && payload && payload.length) {
+        return (
+            <div className={styles.tooltip}>
+                <p className={styles['tooltip-title']}>{label}</p>
+                {payload.map((entry, index) => (
+                    <p key={index} style={{ color: entry.color }}>
+                        {entry.name}: {entry.value.toFixed(2)}
+                    </p>
+                ))}
+            </div>
+        );
+    }
+    return null;
 };
 
 const PriceAnalysisDashboard = () => {
-  const [showInfo, setShowInfo] = useState(false);
-  const [opacity, setOpacity] = useState({
-    ammonia: 1,
-    gas: 1,
-    ets: 1
-  });
+    const [showInfo, setShowInfo] = useState(false);
+    const [opacity, setOpacity] = useState({
+        ammonia: 1,
+        gas: 1,
+        ets: 1
+    });
 
-  const handleMouseEnter = (dataKey) => {
-    const newOpacity = { ammonia: 0.3, gas: 0.3, ets: 0.3 };
-    newOpacity[dataKey] = 1;
-    setOpacity(newOpacity);
-  };
+    const handleMouseEnter = (dataKey) => {
+        const newOpacity = { ammonia: 0.3, gas: 0.3, ets: 0.3 };
+        newOpacity[dataKey] = 1;
+        setOpacity(newOpacity);
+    };
 
-  const handleMouseLeave = () => {
-    setOpacity({ ammonia: 1, gas: 1, ets: 1 });
-  };
+    const handleMouseLeave = () => {
+        setOpacity({ ammonia: 1, gas: 1, ets: 1 });
+    };
 
-  const renderTimeSeriesChart = () => (
-    <div className={styles['chart-container']}>
-      <ResponsiveContainer width="100%" height="100%">
-        <LineChart
-          data={timeSeriesData}
-          margin={{ top: 20, right: 20, left: 20, bottom: 30 }}
-        >
-          <CartesianGrid strokeDasharray="3 3" stroke={theme.axes.gridLines} opacity={0.2} />
-          <XAxis
-            dataKey="date"
-            ticks={['2008-Q1', '2012-Q1', '2016-Q1', '2020-Q1', '2022-Q1']}
-            stroke={theme.axes.axisColor}
-            tickFormatter={(value) => value.split('-')[0]}
-            label={{
-              value: 'Year',
-              position: 'bottom',
-              offset: 0,
-              style: { fill: theme.axes.axisLabel }
-            }}
-          />
-          <YAxis
-            domain={[-3, 3]}
-            ticks={[-3, -2, -1, 0, 1, 2, 3]}
-            stroke={theme.axes.axisColor}
-            label={{
-              value: 'Normalized prices',
-              angle: -90,
-              position: 'center',
-              dx: -20,
-              style: { fill: theme.axes.axisLabel }
-            }}
-          />
-          <Tooltip content={<CustomTooltip />} />
-          <Legend
-            onMouseEnter={handleMouseEnter}
-            onMouseLeave={handleMouseLeave}
-            verticalAlign="top"
-            height={36}
-          />
-          <Line
-            type="monotone"
-            dataKey="ammonia"
-            name="Western Europe Ammonia"
-            stroke={theme.data.primary}
-            strokeWidth={2.5}
-            dot={false}
-            opacity={opacity.ammonia}
-          />
-          <Line
-            type="monotone"
-            dataKey="gas"
-            name="TTF Natural Gas"
-            stroke={theme.data.secondary}
-            strokeWidth={2.5}
-            dot={false}
-            opacity={opacity.gas}
-          />
-          <Line
-            type="monotone"
-            dataKey="ets"
-            name="ETS"
-            stroke={theme.data.tertiary}
-            strokeWidth={2.5}
-            dot={false}
-            opacity={opacity.ets}
-          />
-        </LineChart>
-      </ResponsiveContainer>
-    </div>
-  );
-
-  return (
-    <div className={styles.card}>
-      <div className={styles['card-header']}>
-        <h1 className={styles['card-title']}>Price Analysis Dashboard</h1>
-        <div>
-          <button
-            onClick={() => setShowInfo(!showInfo)}
-            className={`${styles.button} ${
-              showInfo ? styles['button-selected'] : styles['button-default']
-            }`}
-          >
-            {/* Simple info icon using unicode */}
-            <span style={{ marginRight: '8px' }}>ℹ️</span>
-            Informations
-          </button>
+    const renderTimeSeriesChart = () => (
+        // Modification clé ici : ajout des dimensions explicites comme dans TestDashboard
+        <div style={{ width: '100%', height: '500px' }}>
+            <ResponsiveContainer>
+                <LineChart
+                    data={timeSeriesData}
+                    margin={{ top: 20, right: 20, left: 20, bottom: 30 }}
+                >
+                    <CartesianGrid strokeDasharray="3 3" stroke={theme.axes.gridLines} opacity={0.2} />
+                    <XAxis
+                        dataKey="date"
+                        ticks={['2008-Q1', '2012-Q1', '2016-Q1', '2020-Q1', '2022-Q1']}
+                        stroke={theme.axes.axisColor}
+                        tickFormatter={(value) => value.split('-')[0]}
+                        label={{
+                            value: 'Year',
+                            position: 'bottom',
+                            offset: 0,
+                            style: { fill: theme.axes.axisLabel }
+                        }}
+                    />
+                    <YAxis
+                        domain={[-3, 3]}
+                        ticks={[-3, -2, -1, 0, 1, 2, 3]}
+                        stroke={theme.axes.axisColor}
+                        label={{
+                            value: 'Normalized prices',
+                            angle: -90,
+                            position: 'center',
+                            dx: -20,
+                            style: { fill: theme.axes.axisLabel }
+                        }}
+                    />
+                    <Tooltip content={<CustomTooltip />} />
+                    <Legend
+                        onMouseEnter={handleMouseEnter}
+                        onMouseLeave={handleMouseLeave}
+                        verticalAlign="top"
+                        height={36}
+                    />
+                    <Line
+                        type="monotone"
+                        dataKey="ammonia"
+                        name="Western Europe Ammonia"
+                        stroke={theme.data.primary}
+                        strokeWidth={2.5}
+                        dot={false}
+                        opacity={opacity.ammonia}
+                    />
+                    <Line
+                        type="monotone"
+                        dataKey="gas"
+                        name="TTF Natural Gas"
+                        stroke={theme.data.secondary}
+                        strokeWidth={2.5}
+                        dot={false}
+                        opacity={opacity.gas}
+                    />
+                    <Line
+                        type="monotone"
+                        dataKey="ets"
+                        name="ETS"
+                        stroke={theme.data.tertiary}
+                        strokeWidth={2.5}
+                        dot={false}
+                        opacity={opacity.ets}
+                    />
+                </LineChart>
+            </ResponsiveContainer>
         </div>
-      </div>
+    );
 
-      <div className={styles['card-content']}>
-        {showInfo && (
-          <div className={styles.alert}>
-            <p className={styles['alert-description']}>
-              This time series shows the relationship between commodity prices over time.
-            </p>
-          </div>
-        )}
-        {renderTimeSeriesChart()}
-        <p className={styles['text-right']}>Data source: Bloomberg</p>
-      </div>
-    </div>
-  );
+    return (
+        <div className={styles.card}>
+            <div className={styles['card-header']}>
+                <h1 className={styles['card-title']}>Price Analysis Dashboard</h1>
+                <div>
+                    <button
+                        onClick={() => setShowInfo(!showInfo)}
+                        className={`${styles.button} ${
+                            showInfo ? styles['button-selected'] : styles['button-default']
+                        }`}
+                    >
+                        <span style={{ marginRight: '8px' }}>ℹ️</span>
+                        Informations
+                    </button>
+                </div>
+            </div>
+
+            <div className={styles['card-content']}>
+                {showInfo && (
+                    <div className={styles.alert}>
+                        <p className={styles['alert-description']}>
+                            This time series shows the relationship between commodity prices over time.
+                        </p>
+                    </div>
+                )}
+                {renderTimeSeriesChart()}
+                <p className={styles['text-right']}>Data source: Bloomberg</p>
+            </div>
+        </div>
+    );
 };
 
 export default PriceAnalysisDashboard;
