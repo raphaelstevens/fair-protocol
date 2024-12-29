@@ -10,7 +10,7 @@ The global carbon budget represents the maximum cumulative CO2 emissions permiss
 
 Global oil and gas companies hold confirmed reserves that would release over 1,000 gigatons of CO2 when extracted and consumed. This volume alone, excluding coal reserves, substantially exceeds the remaining carbon budget for maintaining climate stability. Reserve expansion continues despite mounting evidence of climate system constraints.
 
-{{< carbon-budget-chart >}}
+{{< react component="CarbonBudgetDashboard" >}}
 
 ## Strategic Misalignment
 

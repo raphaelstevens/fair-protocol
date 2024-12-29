@@ -3,6 +3,7 @@ import { createRoot } from 'react-dom/client';
 import App from './App.jsx'
 import './index.css'
 import PriceAnalysisDashboard from './components/PriceAnalysisDashboard';
+import CarbonBudgetDashboard from './components/CarbonBudgetDashboard';
 import TestDashboard from './components/TestDashboard';
 
 
@@ -36,15 +37,18 @@ function mountReactComponents() {
       
       switch (componentName) {
         case 'PriceAnalysisDashboard':
-          component = <PriceAnalysisDashboard {...props} />;
-          break;
-        case 'TestDashboard':
-          component = <TestDashboard {...props} />;
-          break;
-        default:
-          console.warn(`Unknown component: ${componentName}`);
-          return;
-      }
+        component = <PriceAnalysisDashboard {...props} />;
+        break;
+      case 'CarbonBudgetDashboard':
+         component = <CarbonBudgetDashboard {...props} />;
+         break;
+         case 'TestDashboard':
+      component = <TestDashboard {...props} />;
+         break;
+      default:
+         console.warn(`Unknown component: ${componentName}`);
+         return;
+}
       
       mountComponent(component, mountPoint);
     } catch (error) {
