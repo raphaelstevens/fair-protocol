@@ -10,16 +10,15 @@ const carbonData = [
     { year: 2024, reserves: 1000 }
 ];
 
-// Budget carbone constants
-const BUDGET_1_5C = 500; // 50% probabilité < 1.5°C
-const BUDGET_2_0C = 800; // 67% probabilité < 2.0°C
+const BUDGET_1_5C = 500;
+const BUDGET_2_0C = 800;
 
 const CustomTooltip = ({ active, payload, label }) => {
     if (active && payload && payload.length) {
         return (
-            <div className="bg-white p-4 rounded shadow-lg border border-gray-200">
+            <div className="bg-white dark:bg-gray-800 p-4 rounded shadow-lg border border-gray-200">
                 <p className="font-semibold mb-2">{label}</p>
-                <p style={{ color: '#1f77b4' }}>
+                <p className="text-blue-600 dark:text-blue-400">
                     Réserves: {payload[0].value} Gt CO₂
                 </p>
             </div>
@@ -32,13 +31,13 @@ const CarbonBudgetDashboard = () => {
     const [showInfo, setShowInfo] = useState(false);
 
     return (
-        <div className="bg-white rounded-lg shadow-lg p-6 max-w-6xl mx-auto">
+        <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6 max-w-6xl mx-auto">
             <div className="flex justify-between items-center mb-6">
-                <h1 className="text-2xl font-bold text-gray-800">Budget Carbone Global</h1>
+                <h1 className="text-2xl font-bold text-gray-800 dark:text-white">Budget Carbone Global</h1>
                 <button
                     onClick={() => setShowInfo(!showInfo)}
                     className={`px-4 py-2 rounded-md flex items-center ${
-                        showInfo ? 'bg-blue-600 text-white' : 'bg-gray-100 text-gray-700'
+                        showInfo ? 'bg-blue-600 text-white' : 'bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-white'
                     }`}
                 >
                     <span className="mr-2">ℹ️</span>
@@ -47,24 +46,24 @@ const CarbonBudgetDashboard = () => {
             </div>
 
             {showInfo && (
-                <div className="bg-blue-50 border-l-4 border-blue-500 p-4 mb-6">
-                    <p className="text-blue-700">
+                <div className="bg-blue-50 dark:bg-blue-900 border-l-4 border-blue-500 p-4 mb-6">
+                    <p className="text-blue-700 dark:text-blue-200">
                         Les réserves publiées de pétrole et de gaz sont incompatibles avec les budgets du GIEC 
                         pour maintenir le réchauffement sous 1.5°C (avec 50% de probabilité) ou 2°C (avec 67% de probabilité).
                     </p>
                 </div>
             )}
 
-            <div className="bg-gray-50 p-6 rounded-lg mb-6" style={{ height: '500px' }}>
+            <div className="bg-gray-50 dark:bg-gray-900 p-6 rounded-lg mb-6" style={{ height: '500px' }}>
                 <ResponsiveContainer>
                     <LineChart
                         data={carbonData}
                         margin={{ top: 20, right: 30, left: 40, bottom: 30 }}
                     >
-                        <CartesianGrid strokeDasharray="3 3" />
+                        <CartesianGrid strokeDasharray="3 3" className="stroke-gray-200 dark:stroke-gray-700" />
                         <XAxis 
                             dataKey="year"
-                            style={{ fill: '#1B365D' }}
+                            className="fill-gray-800 dark:fill-gray-200"
                             label={{
                                 value: 'Année',
                                 position: 'bottom',
@@ -74,7 +73,7 @@ const CarbonBudgetDashboard = () => {
                         />
                         <YAxis 
                             domain={[0, 1200]}
-                            style={{ fill: '#1B365D' }}
+                            className="fill-gray-800 dark:fill-gray-200"
                             label={{
                                 value: 'Gt CO₂',
                                 angle: -90,
@@ -86,7 +85,6 @@ const CarbonBudgetDashboard = () => {
                         <Tooltip content={<CustomTooltip />} />
                         <Legend verticalAlign="top" height={36} />
                         
-                        {/* Ligne des réserves */}
                         <Line
                             type="monotone"
                             dataKey="reserves"
@@ -96,7 +94,6 @@ const CarbonBudgetDashboard = () => {
                             dot={true}
                         />
 
-                        {/* Lignes de référence pour les budgets */}
                         <ReferenceLine 
                             y={BUDGET_1_5C} 
                             label={{ 
@@ -120,7 +117,7 @@ const CarbonBudgetDashboard = () => {
                     </LineChart>
                 </ResponsiveContainer>
             </div>
-            <p className="text-right text-gray-600">
+            <p className="text-right text-gray-600 dark:text-gray-400">
                 Source : GIEC 2023, Statistiques de l'industrie pétrolière
             </p>
         </div>
