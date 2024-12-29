@@ -34,6 +34,9 @@ function mountReactComponents() {
         case 'PriceAnalysisDashboard':
           component = <PriceAnalysisDashboard {...props} />;
           break;
+        case 'TestDashboard':
+          component = <TestDashboard {...props} />;
+          break;
         default:
           console.warn(`Unknown component: ${componentName}`);
           return;

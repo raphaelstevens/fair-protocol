@@ -17,6 +17,8 @@ This interconnection between energy and agricultural markets continues to shape 
 
 {{< react component="PriceAnalysisDashboard" >}}
 
+{{< react component="TestDashboard" >}}
+
 This visualization of normalized prices reveals how tightly coupled ammonia (key for fertilizers) remains to natural gas prices, while the European carbon market (ETS) shows limited influence on these strategic commodities. To better understand these relationships:
 
 
