@@ -81,12 +81,16 @@
    Boutons et alertes - Styles hardcodés
    ========================================================================== */
 .button {
-  padding: 0.5rem 1rem;
+  padding: 0.5rem 1rem !important;
   border-radius: 0.375rem;
   font-weight: 500;
   transition: opacity 0.3s;
   cursor: pointer;
   border: none;
+  margin-bottom: 1.5rem !important;  /* Ajout de l'espacement */
+  background-color: #E6EEF4 !important;  /* --entry */
+  display: inline-flex !important;
+  align-items: center !important;
 }
 
 .button-selected {
@@ -112,8 +116,11 @@
 }
 
 .text-right {
-  text-align: right;
+  text-align: right !important;
   font-size: 0.75rem;
   color: #4A5568 !important;  /* --secondary */
   margin: 0.5rem 0 0 0;
+  background-color: #E6EEF4 !important;  /* --entry */
+  padding: 4px 8px !important;
+  border-radius: 4px;
 }
