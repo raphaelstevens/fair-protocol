@@ -77,7 +77,7 @@ params:
   assets:
     css: 
       - css/custom-theme.css
-      - dist/index.css
+      - dist/fair-protocol.css
 
   # Header settings
   ShowBreadCrumbs: true
