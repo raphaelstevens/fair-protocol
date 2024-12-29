@@ -1,73 +1,19 @@
 import React, { useState } from 'react';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
-import styles from './styles.module.css';
 
-// Data constants
 const timeSeriesData = [
     { date: '2008-Q1', ammonia: -0.15, gas: 0.15, ets: 0.0 },
-    { date: '2008-Q2', ammonia: 0.85, gas: 0.35, ets: 0.05 },
-    { date: '2008-Q3', ammonia: 1.45, gas: 0.45, ets: -0.05 },
-    { date: '2008-Q4', ammonia: 0.35, gas: 0.15, ets: -0.15 },
-    { date: '2009-Q1', ammonia: -0.55, gas: -0.95, ets: -0.25 },
-    { date: '2009-Q2', ammonia: -0.45, gas: -0.85, ets: -0.15 },
-    { date: '2009-Q3', ammonia: -0.05, gas: -0.45, ets: -0.05 },
-    { date: '2009-Q4', ammonia: 0.15, gas: -0.15, ets: -0.15 },
-    { date: '2010-Q1', ammonia: 0.25, gas: 0.05, ets: -0.25 },
-    { date: '2010-Q2', ammonia: 0.35, gas: 0.15, ets: -0.20 },
-    { date: '2010-Q3', ammonia: 0.45, gas: 0.25, ets: -0.15 },
-    { date: '2010-Q4', ammonia: 0.95, gas: 0.35, ets: -0.25 },
-    { date: '2011-Q1', ammonia: 1.15, gas: 0.35, ets: -0.35 },
-    { date: '2011-Q2', ammonia: 1.05, gas: 0.38, ets: -0.85 },
-    { date: '2011-Q3', ammonia: 1.15, gas: 0.42, ets: -1.05 },
-    { date: '2011-Q4', ammonia: 1.25, gas: 0.45, ets: -1.25 },
     { date: '2012-Q1', ammonia: 1.15, gas: 0.48, ets: -1.55 },
-    { date: '2012-Q2', ammonia: 0.95, gas: 0.50, ets: -1.75 },
-    { date: '2012-Q3', ammonia: 1.25, gas: 0.52, ets: -1.85 },
-    { date: '2012-Q4', ammonia: 1.45, gas: 0.48, ets: -1.75 },
-    { date: '2013-Q1', ammonia: 1.35, gas: 0.45, ets: -1.65 },
-    { date: '2013-Q2', ammonia: 1.25, gas: 0.42, ets: -1.55 },
-    { date: '2013-Q3', ammonia: 0.95, gas: 0.35, ets: -1.45 },
-    { date: '2013-Q4', ammonia: 0.85, gas: 0.25, ets: -1.35 },
-    { date: '2014-Q1', ammonia: 0.75, gas: 0.15, ets: -1.25 },
-    { date: '2014-Q2', ammonia: 0.65, gas: 0.05, ets: -1.15 },
-    { date: '2014-Q3', ammonia: 0.45, gas: -0.05, ets: -1.25 },
-    { date: '2014-Q4', ammonia: 0.25, gas: -0.15, ets: -1.35 },
-    { date: '2015-Q1', ammonia: 0.15, gas: -0.25, ets: -1.25 },
-    { date: '2015-Q2', ammonia: -0.25, gas: -0.35, ets: -1.35 },
-    { date: '2015-Q3', ammonia: -0.45, gas: -0.38, ets: -1.45 },
-    { date: '2015-Q4', ammonia: -0.65, gas: -0.42, ets: -1.35 },
     { date: '2016-Q1', ammonia: -0.85, gas: -0.45, ets: -1.45 },
-    { date: '2016-Q2', ammonia: -0.55, gas: -0.35, ets: -1.35 },
-    { date: '2016-Q3', ammonia: -0.25, gas: -0.25, ets: -1.25 },
-    { date: '2016-Q4', ammonia: -0.15, gas: -0.15, ets: -1.15 },
-    { date: '2017-Q1', ammonia: 0.05, gas: -0.05, ets: -0.85 },
-    { date: '2017-Q2', ammonia: -0.15, gas: -0.08, ets: -0.65 },
-    { date: '2017-Q3', ammonia: -0.25, gas: -0.12, ets: -0.45 },
-    { date: '2017-Q4', ammonia: -0.15, gas: -0.05, ets: -0.25 },
-    { date: '2018-Q1', ammonia: -0.05, gas: 0.05, ets: 0.15 },
-    { date: '2018-Q2', ammonia: 0.05, gas: 0.15, ets: 0.25 },
-    { date: '2018-Q3', ammonia: -0.15, gas: 0.25, ets: 0.35 },
-    { date: '2018-Q4', ammonia: -0.25, gas: 0.15, ets: 0.45 },
-    { date: '2019-Q1', ammonia: -0.35, gas: -0.05, ets: 0.35 },
-    { date: '2019-Q2', ammonia: -0.45, gas: -0.25, ets: 0.25 },
-    { date: '2019-Q3', ammonia: -0.55, gas: -0.45, ets: 0.35 },
-    { date: '2019-Q4', ammonia: -0.75, gas: -0.85, ets: 0.45 },
     { date: '2020-Q1', ammonia: -0.95, gas: -1.15, ets: 0.35 },
-    { date: '2020-Q2', ammonia: -1.05, gas: -1.45, ets: 0.25 },
-    { date: '2020-Q3', ammonia: -0.85, gas: -1.25, ets: 0.45 },
-    { date: '2020-Q4', ammonia: -0.55, gas: -0.85, ets: 0.55 },
-    { date: '2021-Q1', ammonia: -0.25, gas: -0.45, ets: 0.75 },
-    { date: '2021-Q2', ammonia: 0.45, gas: 0.25, ets: 1.05 },
-    { date: '2021-Q3', ammonia: 1.65, gas: 1.85, ets: 1.35 },
-    { date: '2021-Q4', ammonia: 2.15, gas: 2.35, ets: 1.65 },
     { date: '2022-Q1', ammonia: 2.45, gas: 2.55, ets: 1.85 }
 ];
 
 const CustomTooltip = ({ active, payload, label }) => {
     if (active && payload && payload.length) {
         return (
-            <div className={styles.tooltip}>
-                <p className={styles['tooltip-title']}>{label}</p>
+            <div className="bg-white p-4 rounded shadow-lg border border-gray-200">
+                <p className="font-semibold mb-2">{label}</p>
                 {payload.map((entry, index) => (
                     <p key={index} style={{ color: entry.color }}>
                         {entry.name}: {entry.value.toFixed(2)}
@@ -103,31 +49,29 @@ const PriceAnalysisDashboard = () => {
     };
 
     return (
-        <div className={styles.card}>
-            <div className={styles['card-header']}>
-                <h1 className={styles['card-title']}>Price Analysis Dashboard</h1>
-                <div>
-                    <button
-                        onClick={() => setShowInfo(!showInfo)}
-                        className={`${styles.button} ${
-                            showInfo ? styles['button-selected'] : styles['button-default']
-                        }`}
-                    >
-                        <span style={{ marginRight: '8px' }}>ℹ️</span>
-                        Informations
-                    </button>
-                </div>
+        <div className="bg-white rounded-lg shadow-lg p-6 max-w-6xl mx-auto">
+            <div className="flex justify-between items-center mb-6">
+                <h1 className="text-2xl font-bold text-gray-800">Tableau de bord d'analyse des prix</h1>
+                <button
+                    onClick={() => setShowInfo(!showInfo)}
+                    className={`px-4 py-2 rounded-md flex items-center ${
+                        showInfo ? 'bg-blue-600 text-white' : 'bg-gray-100 text-gray-700'
+                    }`}
+                >
+                    <span className="mr-2">ℹ️</span>
+                    Informations
+                </button>
             </div>
 
-            <div className={styles['card-content']}>
+            <div>
                 {showInfo && (
-                    <div className={styles.alert}>
-                        <p className={styles['alert-description']}>
-                            This time series shows the relationship between commodity prices over time.
+                    <div className="bg-blue-50 border-l-4 border-blue-500 p-4 mb-6">
+                        <p className="text-blue-700">
+                            Cette série temporelle montre la relation entre les prix des matières premières au fil du temps.
                         </p>
                     </div>
                 )}
-                <div style={{ width: '100%', height: '500px', backgroundColor: '#E6EEF4', padding: '20px', borderRadius: '8px', margin: '20px 0' }}>
+                <div className="bg-gray-50 p-6 rounded-lg mb-6" style={{ height: '500px' }}>
                     <ResponsiveContainer>
                         <LineChart
                             data={timeSeriesData}
@@ -140,7 +84,7 @@ const PriceAnalysisDashboard = () => {
                                 tickFormatter={(value) => value.split('-')[0]}
                                 style={axisStyle}
                                 label={{
-                                    value: 'Year',
+                                    value: 'Année',
                                     position: 'bottom',
                                     offset: 0,
                                     style: { ...axisStyle }
@@ -151,7 +95,7 @@ const PriceAnalysisDashboard = () => {
                                 ticks={[-3, -2, -1, 0, 1, 2, 3]}
                                 style={axisStyle}
                                 label={{
-                                    value: 'Normalized prices',
+                                    value: 'Prix normalisés',
                                     angle: -90,
                                     position: 'center',
                                     dx: -20,
@@ -168,7 +112,8 @@ const PriceAnalysisDashboard = () => {
                             <Line
                                 type="monotone"
                                 dataKey="ammonia"
-                                name="Western Europe Ammonia"
+                                name="Ammoniac Europe de l'Ouest"
+                                stroke="#1f77b4"
                                 strokeWidth={2.5}
                                 dot={false}
                                 opacity={opacity.ammonia}
@@ -176,7 +121,8 @@ const PriceAnalysisDashboard = () => {
                             <Line
                                 type="monotone"
                                 dataKey="gas"
-                                name="TTF Natural Gas"
+                                name="Gaz naturel TTF"
+                                stroke="#ff7f0e"
                                 strokeWidth={2.5}
                                 dot={false}
                                 opacity={opacity.gas}
@@ -185,6 +131,7 @@ const PriceAnalysisDashboard = () => {
                                 type="monotone"
                                 dataKey="ets"
                                 name="ETS"
+                                stroke="#2ca02c"
                                 strokeWidth={2.5}
                                 dot={false}
                                 opacity={opacity.ets}
@@ -192,7 +139,7 @@ const PriceAnalysisDashboard = () => {
                         </LineChart>
                     </ResponsiveContainer>
                 </div>
-                <p className={styles['text-right']}>Data source: Bloomberg</p>
+                <p className="text-right text-gray-600">Source des données : Bloomberg</p>
             </div>
         </div>
     );

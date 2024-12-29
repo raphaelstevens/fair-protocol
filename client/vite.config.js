@@ -13,7 +13,7 @@ export default defineConfig({
     }
   },
   build: {
-    outDir: 'dist',
+    outDir: '../static/dist',
     emptyOutDir: true,
     lib: {
       entry: resolve(__dirname, 'src/main.jsx'),
@@ -34,6 +34,11 @@ export default defineConfig({
   resolve: {
     alias: {
       '@': resolve(__dirname, './src'),
+    },
+  },
+  server: {
+    watch: {
+      usePolling: true,
     },
   }
 });
