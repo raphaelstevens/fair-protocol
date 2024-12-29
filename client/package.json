@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "build": "vite build && tailwindcss -i ./src/index.css -o ./dist/index.css --minify",
     "copy-css": "node scripts/copy-css.js",
     "prebuild": "npm run copy-css",
     "lint": "eslint .",
@@ -37,3 +37,5 @@
     "vite": "^6.0.5"
   }
 }
+
+
