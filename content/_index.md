@@ -31,3 +31,5 @@ Access comprehensive technical documentation including detailed provision calcul
 
 [Review technical details](/en/technical) →
 {{< /section >}}
+
+Based on Jean Valayer & Noémie Wouters paper available at [OpenScience](https://www.openscience.fr/IMG/pdf/2.valayer_et_wouters-decarbon.pdf)
