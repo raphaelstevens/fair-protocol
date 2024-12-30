@@ -65,7 +65,9 @@ const CarbonBudgetChart = () => {
     color: 'var(--chart-button-text)',
     padding: '8px 12px', // Plus grand padding pour un vrai bouton
     borderRadius: '3px', // Coins arrondis
-    margin: '6px', 
+    marginRight: '24px',
+    marginTop: '24px',
+    marginBottom: '24px',
     cursor: 'pointer', // Curseur clic
     transition: 'all 0.3s ease', // Transition pour hover/clic
   }}
@@ -76,12 +78,12 @@ const CarbonBudgetChart = () => {
     e.currentTarget.style.opacity = '1'; // Retour normal
   }}
   onMouseDown={(e) => {
-    e.currentTarget.style.backgroundColor = 'var(--primary)'; // Couleur au clic
-    e.currentTarget.style.color = 'var(--chart-button-text-select)'; // Texte inversé
+    e.currentTarget.style.backgroundColor = 'var(--chart-button-bg)'; // Couleur au clic
+    e.currentTarget.style.color = 'var(--chart-button-text)'; // Texte inversé
   }}
   onMouseUp={(e) => {
-    e.currentTarget.style.backgroundColor = 'var(--chart-button-bg)'; // Retour couleur normale
-    e.currentTarget.style.color = 'var(--chart-button-text)'; // Texte normal
+    e.currentTarget.style.backgroundColor = 'var(--chart-button-bg-select)'; // Retour couleur normale
+    e.currentTarget.style.color = 'var(--chart-button-text-select)'; // Texte normal
   }}
   className="flex items-center gap-2 rounded-lg"
 >
