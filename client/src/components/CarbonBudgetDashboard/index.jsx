@@ -94,7 +94,7 @@ const CarbonBudgetChart = () => {
       
       <div style={{ 
         backgroundColor: 'var(--chart-bg)',
-        height: '400px'
+        height: '400px',
         borderRadius: '3px',
       }} className="p-6 rounded-lg">
         <ResponsiveContainer>
