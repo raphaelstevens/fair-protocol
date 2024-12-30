@@ -179,12 +179,20 @@ const PriceAnalysisDashboard = () => {
 
     const buttonStyle = {
         background: 'var(--chart-button-bg)',
-        color: 'var(--chart-button-text)'
+        color: 'var(--chart-button-text)', 
+        marginRight: '24px',
+        marginTop: '2px',
+        marginBottom: '22px',
+        padding: '8px 12px'
     };
 
     const selectedButtonStyle = {
         background: 'var(--chart-button-bg-select)',
-        color: 'var(--chart-button-text-select)'
+        color: 'var(--chart-button-text-select)',
+        marginRight: '24px',
+        marginTop: '2px',
+        marginBottom: '22px',
+        padding: '8px 12px'
     };
 
     const renderTimeSeriesChart = () => (
