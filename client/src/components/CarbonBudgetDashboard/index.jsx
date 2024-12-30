@@ -55,7 +55,7 @@ const CarbonBudgetChart = () => {
   return (
     <div className="p-6 w-full" style={{ backgroundColor: 'var(--theme)' }}>
       <div className="flex justify-between items-center mb-6">
-        <h2 className="text-lg font-bold" style={{ color: 'var(--primary)' }}>
+        <h2 className="text-sm font-bold" style={{ color: 'var(--primary)' }}>
           Carbon Budget vs Fossil Fuel Reserves
         </h2>
 <button
@@ -63,9 +63,9 @@ const CarbonBudgetChart = () => {
   style={{
     backgroundColor: 'var(--chart-button-bg)',
     color: 'var(--chart-button-text)',
-    border: '2px solid var(--primary)', // Encadrement
-    padding: '12px 20px', // Plus grand padding pour un vrai bouton
-    borderRadius: '6px', // Coins arrondis
+    padding: '8px 12px', // Plus grand padding pour un vrai bouton
+    borderRadius: '3px', // Coins arrondis
+    margin: '6px', 
     cursor: 'pointer', // Curseur clic
     transition: 'all 0.3s ease', // Transition pour hover/clic
   }}
