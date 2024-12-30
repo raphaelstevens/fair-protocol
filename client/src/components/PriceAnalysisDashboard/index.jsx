@@ -314,27 +314,27 @@ const PriceAnalysisDashboard = () => {
         <div style={{ background: 'var(--theme)', padding: '1.5rem', maxWidth: '72rem', margin: '0 auto' }}>
             <div className="flex flex-col gap-4 mb-6">
                 <div className="flex justify-between items-center">
-                    <h1 className="text-base font-bold" style={{ color: 'var(--primary)' }}>
+                    <h3 className="text-base font-medium" style={{ color: 'var(--primary)' }}>
                         Tableau de bord d'analyse des prix
-                    </h1>
+                    </h3>
                     <div className="flex gap-2">
                         <button
                             onClick={() => setSelectedView('time-series')}
-                            className="px-4 py-2 rounded-md"
+                            className="px-6 rounded-md"
                             style={selectedView === 'time-series' ? selectedButtonStyle : buttonStyle}
                         >
                             Série temporelle
                         </button>
                         <button
                             onClick={() => setSelectedView('correlation')}
-                            className="px-4 py-2 rounded-md"
+                            className="px-6 rounded-md"
                             style={selectedView === 'correlation' ? selectedButtonStyle : buttonStyle}
                         >
                             Analyse de corrélation
                         </button>
                         <button
                             onClick={() => setShowInfo(!showInfo)}
-                            className="px-4 py-2 rounded-md flex items-center gap-2"
+                            className="px-6 rounded-md flex items-center gap-2"
                             style={showInfo ? selectedButtonStyle : buttonStyle}
                         >
                             <span>ℹ️</span>
@@ -349,7 +349,7 @@ const PriceAnalysisDashboard = () => {
                             <button
                                 key={key}
                                 onClick={() => setSelectedComparison(key)}
-                                className="px-4 py-2 rounded-md"
+                                className="px-6 rounded-md"
                                 style={selectedComparison === key ? selectedButtonStyle : buttonStyle}
                             >
                                 {comparisons[key].title}

@@ -44,7 +44,7 @@
     --chart-line-7: #9967C4;  
 
     /* Tooltip */
-    --chart-tooltip-bg: var(--entry);
+    --chart-tooltip-bg: var(--theme);
     --chart-tooltip-text: var(--primary);
     --chart-tooltip-border: #E2E8F0;
 
@@ -55,8 +55,8 @@
     --chart-button-text-select: var(--entry);
 
     /* Annotations et alertes */
-    --chart-annotation-bg: var(--tertiary);
-    --chart-annotation-line: var(--secondary);
+    --chart-annotation-bg: var(--theme);
+    --chart-annotation-line: var(--primary);
     --chart-annotation-text: var(--primary);
 }
 
@@ -118,8 +118,8 @@
     --chart-button-text-select: var(--entry);
 
     /* Annotations et alertes */
-    --chart-annotation-bg: var(--tertiary);
-    --chart-annotation-line: var(--secondary);
+    --chart-annotation-bg: var(--theme);
+    --chart-annotation-line: var(--primary);
     --chart-annotation-text: var(--primary);
 }
 
