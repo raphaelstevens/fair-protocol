@@ -16,10 +16,18 @@ const BUDGET_2_0C = 800;
 const CustomTooltip = ({ active, payload, label }) => {
     if (active && payload && payload.length) {
         return (
-            <div className="bg-white p-4 rounded shadow-lg border border-gray-200" 
-                 style={{ backgroundColor: 'var(--entry)', color: 'var(--primary)' }}>
-                <p className="font-semibold mb-2">{label}</p>
-                <p style={{ color: 'var(--icon-info)' }}>
+            <div style={{
+                backgroundColor: 'var(--entry)',
+                border: '1px solid var(--border)',
+                padding: '16px',
+                borderRadius: '6px'
+            }}>
+                <p style={{ 
+                    color: 'var(--primary)',
+                    fontWeight: 600, 
+                    marginBottom: '8px'
+                }}>{label}</p>
+                <p style={{ color: 'var(--chart-line-1)' }}>
                     Réserves: {payload[0].value} Gt CO₂
                 </p>
             </div>
@@ -31,20 +39,48 @@ const CustomTooltip = ({ active, payload, label }) => {
 const CarbonBudgetDashboard = () => {
     const [showInfo, setShowInfo] = useState(false);
 
+    const containerStyle = {
+        backgroundColor: 'var(--theme)',
+        color: 'var(--primary)',
+        padding: '24px',
+        borderRadius: '8px',
+        maxWidth: '72rem',
+        margin: '0 auto',
+        boxShadow: '0 10px 15px -3px rgba(0, 0, 0, 0.1)'
+    };
+
+    const chartContainerStyle = {
+        backgroundColor: 'var(--entry)',
+        padding: '24px',
+        borderRadius: '8px',
+        marginBottom: '24px',
+        height: '500px'
+    };
+
+    const buttonStyle = {
+        backgroundColor: showInfo ? 'var(--icon-info)' : 'var(--entry)',
+        color: showInfo ? '#FFFFFF' : 'var(--primary)',
+        padding: '8px 16px',
+        borderRadius: '6px',
+        display: 'flex',
+        alignItems: 'center'
+    };
+
+    const infoBoxStyle = {
+        backgroundColor: 'var(--entry)',
+        borderLeft: '4px solid var(--icon-info)',
+        padding: '16px',
+        marginBottom: '24px',
+        color: 'var(--icon-info)'
+    };
+
     return (
-        <div className="p-6 max-w-6xl mx-auto rounded-lg shadow-lg" 
-             style={{ backgroundColor: 'var(--theme)', color: 'var(--primary)' }}>
+        <div style={containerStyle}>
             <div className="flex justify-between items-center mb-6">
                 <h1 className="text-2xl font-bold">Budget Carbone Global</h1>
                 <button
                     onClick={() => setShowInfo(!showInfo)}
-                    className={`px-4 py-2 rounded-md flex items-center ${
-                        showInfo ? 'text-white' : ''
-                    }`}
-                    style={{
-                        backgroundColor: showInfo ? 'var(--icon-info)' : 'var(--entry)',
-                        color: showInfo ? 'white' : 'var(--primary)'
-                    }}
+                    style={buttonStyle}
                 >
                     <span className="mr-2">ℹ️</span>
                     Informations
@@ -52,12 +88,7 @@ const CarbonBudgetDashboard = () => {
             </div>
 
             {showInfo && (
-                <div className="p-4 mb-6 border-l-4 rounded" 
-                     style={{ 
-                         backgroundColor: 'var(--entry)', 
-                         borderColor: 'var(--icon-info)',
-                         color: 'var(--icon-info)'
-                     }}>
+                <div style={infoBoxStyle}>
                     <p>
                         Les réserves publiées de pétrole et de gaz sont incompatibles avec les budgets du GIEC 
                         pour maintenir le réchauffement sous 1.5°C (avec 50% de probabilité) ou 2°C (avec 67% de probabilité).
@@ -65,8 +96,7 @@ const CarbonBudgetDashboard = () => {
                 </div>
             )}
 
-            <div className="p-6 rounded-lg mb-6" 
-                 style={{ backgroundColor: 'var(--entry)', height: '500px' }}>
+            <div style={chartContainerStyle}>
                 <ResponsiveContainer>
                     <LineChart
                         data={carbonData}
@@ -130,7 +160,7 @@ const CarbonBudgetDashboard = () => {
                     </LineChart>
                 </ResponsiveContainer>
             </div>
-            <p className="text-right" style={{ color: 'var(--secondary)' }}>
+            <p style={{ textAlign: 'right', color: 'var(--secondary)' }}>
                 Source : GIEC 2023, Statistiques de l'industrie pétrolière
             </p>
         </div>
