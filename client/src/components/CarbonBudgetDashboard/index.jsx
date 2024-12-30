@@ -26,52 +26,18 @@ const CarbonBudgetChart = () => {
     }
   ];
 
-  const containerStyle = {
-    backgroundColor: 'var(--theme)',
-    color: 'var(--primary)',
-    padding: '1.5rem',
-    borderRadius: '0.5rem'
-  };
-
-  const titleStyle = {
-    fontSize: '1rem',
-    fontWeight: 'bold',
-    color: 'var(--primary)',
-    marginBottom: '1rem'
-  };
-
-  const buttonStyle = {
-    display: 'flex',
-    alignItems: 'center',
-    gap: '0.5rem',
-    padding: '0.5rem 1rem',
-    borderRadius: '0.375rem',
-    backgroundColor: 'var(--entry)',
-    color: 'var(--primary)',
-    border: 'none',
-    cursor: 'pointer'
-  };
-
-  const tooltipStyle = {
-    backgroundColor: 'var(--entry)',
-    color: 'var(--primary)',
-    padding: '1rem',
-    borderRadius: '0.375rem',
-    border: '1px solid var(--chart-grid)'
-  };
-
   const CustomTooltip = ({ active, payload }) => {
     if (active && payload && payload.length) {
       const entry = payload[0].payload;
       return (
-        <div style={tooltipStyle}>
-          <p style={{ fontWeight: 'bold', marginBottom: '0.25rem' }}>
+        <div className="bg-white p-4 rounded border border-gray-200">
+          <p className="font-semibold mb-1">
             {entry.name}: {entry.value} Gt CO₂
           </p>
           {showCoal && entry.value === 4070 && (
-            <div style={{ marginTop: '0.5rem' }}>
-              <div style={{ color: 'var(--chart-line-1)' }}>Oil & Gas: 1000 Gt CO₂</div>
-              <div style={{ color: 'var(--chart-line-2)' }}>Coal: 3070 Gt CO₂</div>
+            <div className="mt-2">
+              <div className="text-blue-600">Oil & Gas: 1000 Gt CO₂</div>
+              <div className="text-purple-600">Coal: 3070 Gt CO₂</div>
             </div>
           )}
         </div>
@@ -80,54 +46,41 @@ const CarbonBudgetChart = () => {
     return null;
   };
 
-  const chartContainerStyle = {
-    backgroundColor: 'var(--entry)',
-    padding: '1.5rem',
-    borderRadius: '0.5rem',
-    height: '400px'
-  };
-
   return (
-    <div style={containerStyle}>
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.5rem' }}>
-        <h2 style={titleStyle}>Carbon Budget vs Fossil Fuel Reserves</h2>
+    <div className="p-6 w-full">
+      <div className="flex justify-between items-center mb-6">
+        <h2 className="text-lg font-bold">Carbon Budget vs Fossil Fuel Reserves</h2>
         <button
           onClick={() => setShowCoal(!showCoal)}
-          style={buttonStyle}
+          className="flex items-center gap-2 px-4 py-2 rounded-lg bg-gray-100 text-gray-700"
         >
           {showCoal ? "⊖ Hide Coal Reserves" : "⊕ Add Coal Reserves"}
         </button>
       </div>
 
-      <div style={chartContainerStyle}>
+      <div className="h-96 bg-gray-50 p-6 rounded-lg">
         <ResponsiveContainer>
           <BarChart
             data={data}
             layout="vertical"
             margin={{ top: 20, right: 30, left: 20, bottom: 50 }}
           >
-            <CartesianGrid 
-              strokeDasharray="3 3" 
-              stroke="var(--chart-grid)" 
-            />
+            <CartesianGrid strokeDasharray="3 3" />
             <XAxis 
               type="number"
               domain={showCoal ? [0, 4500] : [0, 1200]}
               ticks={showCoal ? [0, 500, 1000, 2000, 3000, 4000] : [0, 500, 1000]}
-              stroke="var(--chart-axis)"
             >
               <Label 
                 value="Gigatons of CO₂ Emissions (Gt CO₂)" 
                 position="bottom" 
                 offset={20}
-                style={{ fill: 'var(--chart-axis)' }}
               />
             </XAxis>
             <YAxis 
               type="category" 
               dataKey="name" 
               width={180}
-              stroke="var(--chart-axis)"
             />
             <Tooltip content={<CustomTooltip />} />
             <Bar 
@@ -146,7 +99,7 @@ const CarbonBudgetChart = () => {
         </ResponsiveContainer>
       </div>
       
-      <p style={{ fontSize: '0.875rem', color: 'var(--secondary)', marginTop: '1rem', textAlign: 'right' }}>
+      <p className="text-sm text-gray-600 mt-4 text-right">
         Source: Industry reports and IPCC carbon budget estimates, 2024
       </p>
     </div>
