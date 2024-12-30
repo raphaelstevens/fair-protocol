@@ -58,17 +58,35 @@ const CarbonBudgetChart = () => {
         <h2 className="text-lg font-bold" style={{ color: 'var(--primary)' }}>
           Carbon Budget vs Fossil Fuel Reserves
         </h2>
-        <button
-          onClick={() => setShowCoal(!showCoal)}
-          style={{
-            backgroundColor: 'var(--chart-button-bg)',
-            color: 'var(--chart-button-text)'
-          }}
-          className="flex items-center gap-2 px-4 py-2 rounded-lg"
-        >
-          {showCoal ? "⊖ Hide Coal Reserves" : "⊕ Add Coal Reserves"}
-        </button>
-      </div>
+<button
+  onClick={() => setShowCoal(!showCoal)}
+  style={{
+    backgroundColor: 'var(--chart-button-bg)',
+    color: 'var(--chart-button-text)',
+    border: '2px solid var(--primary)', // Encadrement
+    padding: '12px 20px', // Plus grand padding pour un vrai bouton
+    borderRadius: '6px', // Coins arrondis
+    cursor: 'pointer', // Curseur clic
+    transition: 'all 0.3s ease', // Transition pour hover/clic
+  }}
+  onMouseOver={(e) => {
+    e.currentTarget.style.opacity = '0.8'; // Hover
+  }}
+  onMouseOut={(e) => {
+    e.currentTarget.style.opacity = '1'; // Retour normal
+  }}
+  onMouseDown={(e) => {
+    e.currentTarget.style.backgroundColor = 'var(--primary)'; // Couleur au clic
+    e.currentTarget.style.color = 'var(--chart-button-text-select)'; // Texte inversé
+  }}
+  onMouseUp={(e) => {
+    e.currentTarget.style.backgroundColor = 'var(--chart-button-bg)'; // Retour couleur normale
+    e.currentTarget.style.color = 'var(--chart-button-text)'; // Texte normal
+  }}
+  className="flex items-center gap-2 rounded-lg"
+>
+  {showCoal ? "⊖ Hide Coal Reserves" : "⊕ Add Coal Reserves"}
+</button>
       
       <div style={{ 
         backgroundColor: 'var(--chart-bg)',
