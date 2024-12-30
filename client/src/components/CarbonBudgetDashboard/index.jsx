@@ -1,170 +1,125 @@
 import React, { useState } from 'react';
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, ReferenceLine } from 'recharts';
+import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Label } from 'recharts';
+import { PlusCircle, MinusCircle } from 'lucide-react';
 
-const carbonData = [
-    { year: 2000, reserves: 580 },
-    { year: 2009, reserves: 620 },
-    { year: 2019, reserves: 890 },
-    { year: 2020, reserves: 910 },
-    { year: 2023, reserves: 980 },
-    { year: 2024, reserves: 1000 }
-];
+const CarbonBudgetChart = () => {
+  const [showCoal, setShowCoal] = useState(false);
 
-const BUDGET_1_5C = 500;
-const BUDGET_2_0C = 800;
+  const data = showCoal ? [
+    {
+      name: 'Total Fossil Fuel Reserves',
+      value: 4070,
+      oilAndGas: 1000,
+      coal: 3070,
+      fill: '#4A90E2'  // Couleur primaire du thème pour oil & gas
+    },
+    {
+      name: 'Safe Climate Budget',
+      value: 500,
+      fill: '#5BAE6E'  // Couleur solution du thème
+    }
+  ] : [
+    {
+      name: 'Current Oil & Gas Reserves',
+      value: 1000,
+      fill: '#4A90E2'  // Couleur primaire du thème
+    },
+    {
+      name: 'Safe Climate Budget',
+      value: 500,
+      fill: '#5BAE6E'  // Couleur solution du thème
+    }
+  ];
 
-const CustomTooltip = ({ active, payload, label }) => {
+  const CustomTooltip = ({ active, payload }) => {
     if (active && payload && payload.length) {
-        return (
-            <div style={{
-                backgroundColor: 'var(--entry)',
-                border: '1px solid var(--border)',
-                padding: '16px',
-                borderRadius: '6px'
-            }}>
-                <p style={{ 
-                    color: 'var(--primary)',
-                    fontWeight: 600, 
-                    marginBottom: '8px'
-                }}>{label}</p>
-                <p style={{ color: 'var(--chart-line-1)' }}>
-                    Réserves: {payload[0].value} Gt CO₂
-                </p>
+      const entry = payload[0].payload;
+      return (
+        <div className="bg-white border border-gray-200 p-4 rounded">
+          <p className="font-semibold mb-1">
+            {entry.name}: {entry.value} Gt CO₂
+          </p>
+          {showCoal && entry.value === 4070 && (
+            <div className="mt-2">
+              <div style={{ color: '#4A90E2' }}>Oil & Gas: 1000 Gt CO₂</div>
+              <div style={{ color: '#9967C4' }}>Coal: 3070 Gt CO₂</div>
             </div>
-        );
+          )}
+        </div>
+      );
     }
     return null;
+  };
+
+  return (
+    <div className="p-6 bg-white rounded-lg">
+      <div className="flex justify-between items-center mb-6">
+        <h2 className="text-xl font-bold text-gray-800">Carbon Budget vs Fossil Fuel Reserves</h2>
+        <button
+          onClick={() => setShowCoal(!showCoal)}
+          className="flex items-center gap-2 px-4 py-2 rounded-lg bg-gray-100 hover:bg-gray-200 text-gray-700"
+        >
+          {showCoal ? (
+            <>
+              <MinusCircle className="w-5 h-5" />
+              <span>Hide Coal Reserves</span>
+            </>
+          ) : (
+            <>
+              <PlusCircle className="w-5 h-5" />
+              <span>Add Coal Reserves</span>
+            </>
+          )}
+        </button>
+      </div>
+
+      <div style={{ height: '400px' }}>
+        <ResponsiveContainer>
+          <BarChart
+            data={data}
+            layout="vertical"
+            margin={{ top: 20, right: 30, left: 20, bottom: 50 }}
+          >
+            <CartesianGrid strokeDasharray="3 3" stroke="#E2E8F0" />
+            <XAxis 
+              type="number"
+              domain={showCoal ? [0, 4500] : [0, 1200]}
+              ticks={showCoal ? [0, 500, 1000, 2000, 3000, 4000] : [0, 500, 1000]}
+              stroke="#718096"
+            >
+              <Label 
+                value="Gigatons of CO₂ Emissions (Gt CO₂)" 
+                position="bottom" 
+                offset={20}
+                style={{ fill: '#718096' }}
+              />
+            </XAxis>
+            <YAxis 
+              type="category" 
+              dataKey="name" 
+              width={180}
+              stroke="#718096"
+            />
+            <Tooltip content={<CustomTooltip />} />
+            <Bar 
+              dataKey="value"
+              fill={(entry) => {
+                if (showCoal && entry.value === 4070) {
+                  return '#9967C4';  // Violet pour le total avec charbon
+                }
+                return entry.fill;
+              }}
+              radius={[0, 4, 4, 0]}
+            />
+          </BarChart>
+        </ResponsiveContainer>
+      </div>
+      
+      <p className="text-sm text-gray-600 mt-4 text-right">
+        Source: Industry reports and IPCC carbon budget estimates, 2024
+      </p>
+    </div>
+  );
 };
 
-const CarbonBudgetDashboard = () => {
-    const [showInfo, setShowInfo] = useState(false);
-
-    const containerStyle = {
-        backgroundColor: 'var(--theme)',
-        color: 'var(--primary)',
-        padding: '24px',
-        borderRadius: '8px',
-        maxWidth: '72rem',
-        margin: '0 auto',
-        boxShadow: '0 10px 15px -3px rgba(0, 0, 0, 0.1)'
-    };
-
-    const chartContainerStyle = {
-        backgroundColor: 'var(--entry)',
-        padding: '24px',
-        borderRadius: '8px',
-        marginBottom: '24px',
-        height: '500px'
-    };
-
-    const buttonStyle = {
-        backgroundColor: showInfo ? 'var(--icon-info)' : 'var(--entry)',
-        color: showInfo ? '#FFFFFF' : 'var(--primary)',
-        padding: '8px 16px',
-        borderRadius: '6px',
-        display: 'flex',
-        alignItems: 'center'
-    };
-
-    const infoBoxStyle = {
-        backgroundColor: 'var(--entry)',
-        borderLeft: '4px solid var(--icon-info)',
-        padding: '16px',
-        marginBottom: '24px',
-        color: 'var(--icon-info)'
-    };
-
-    return (
-        <div style={containerStyle}>
-            <div className="flex justify-between items-center mb-6">
-                <h1 className="text-2xl font-bold">Budget Carbone Global</h1>
-                <button
-                    onClick={() => setShowInfo(!showInfo)}
-                    style={buttonStyle}
-                >
-                    <span className="mr-2">ℹ️</span>
-                    Informations
-                </button>
-            </div>
-
-            {showInfo && (
-                <div style={infoBoxStyle}>
-                    <p>
-                        Les réserves publiées de pétrole et de gaz sont incompatibles avec les budgets du GIEC 
-                        pour maintenir le réchauffement sous 1.5°C (avec 50% de probabilité) ou 2°C (avec 67% de probabilité).
-                    </p>
-                </div>
-            )}
-
-            <div style={chartContainerStyle}>
-                <ResponsiveContainer>
-                    <LineChart
-                        data={carbonData}
-                        margin={{ top: 20, right: 30, left: 40, bottom: 30 }}
-                    >
-                        <CartesianGrid strokeDasharray="3 3" stroke="var(--chart-grid)" />
-                        <XAxis
-                            dataKey="year"
-                            stroke="var(--chart-axis)"
-                            label={{
-                                value: 'Année',
-                                position: 'bottom',
-                                offset: 0,
-                                style: { fill: 'var(--chart-axis)' }
-                            }}
-                        />
-                        <YAxis
-                            domain={[0, 1200]}
-                            stroke="var(--chart-axis)"
-                            label={{
-                                value: 'Gt CO₂',
-                                angle: -90,
-                                position: 'insideLeft',
-                                offset: -20,
-                                style: { fill: 'var(--chart-axis)' }
-                            }}
-                        />
-                        <Tooltip content={<CustomTooltip />} />
-                        <Legend verticalAlign="top" height={36} />
-                        
-                        <Line
-                            type="monotone"
-                            dataKey="reserves"
-                            name="Réserves confirmées pétrole et gaz"
-                            stroke="var(--chart-line-1)"
-                            strokeWidth={2.5}
-                            dot={true}
-                        />
-
-                        <ReferenceLine
-                            y={BUDGET_1_5C}
-                            label={{
-                                value: "Budget 1.5°C (50%)",
-                                position: 'right',
-                                style: { fill: 'var(--chart-line-2)' }
-                            }}
-                            stroke="var(--chart-line-2)"
-                            strokeDasharray="3 3"
-                        />
-
-                        <ReferenceLine
-                            y={BUDGET_2_0C}
-                            label={{
-                                value: "Budget 2.0°C (67%)",
-                                position: 'right',
-                                style: { fill: 'var(--chart-line-3)' }
-                            }}
-                            stroke="var(--chart-line-3)"
-                            strokeDasharray="3 3"
-                        />
-                    </LineChart>
-                </ResponsiveContainer>
-            </div>
-            <p style={{ textAlign: 'right', color: 'var(--secondary)' }}>
-                Source : GIEC 2023, Statistiques de l'industrie pétrolière
-            </p>
-        </div>
-    );
-};
-
-export default CarbonBudgetDashboard;
+export default CarbonBudgetChart;
