@@ -265,32 +265,108 @@ const PriceAnalysisDashboard = () => {
         }));
         const regressionLine = calculateRegression(timeSeriesData, comparison.xKey, comparison.yKey);
 
-return (
-    <div style={{ background: 'var(--theme)', padding: '1.5rem', maxWidth: '72rem', margin: '0 auto' }}>
-        <div className="flex flex-col gap-4">
-            {/* Les boutons et titre déjà modifiés restent tels quels... */}
+        return (
+            <ResponsiveContainer width="100%" height={500}>
+                <ScatterChart
+                    margin={{ top: 20, right: 20, left: 20, bottom: 30 }}
+                >
+                    <CartesianGrid strokeDasharray="3 3" stroke="var(--chart-grid)" />
+                    <XAxis
+                        type="number"
+                        dataKey="x"
+                        name={comparison.xKey}
+                        stroke="var(--chart-axis)"
+                        domain={[-3, 3]}
+                        label={{
+                            value: comparison.xKey.charAt(0).toUpperCase() + comparison.xKey.slice(1),
+                            position: 'bottom',
+                            offset: 0,
+                            style: { fill: 'var(--chart-axis)' }
+                        }}
+                    />
+                    <YAxis
+                        type="number"
+                        dataKey="y"
+                        name={comparison.yKey}
+                        stroke="var(--chart-axis)"
+                        domain={[-3, 3]}
+                        label={{
+                            value: comparison.yKey.charAt(0).toUpperCase() + comparison.yKey.slice(1),
+                            angle: -90,
+                            position: 'left',
+                            offset: -10,
+                            style: { fill: 'var(--chart-axis)' }
+                        }}
+                    />
+                    <Tooltip content={<ScatterTooltip />} />
+                    <Scatter data={scatterData} fill="var(--chart-line-1)" />
+                    <Scatter
+                        data={regressionLine}
+                        line={{ stroke: 'var(--chart-line-2)', strokeWidth: 2 }}
+                        shape={() => null}
+                    />
+                </ScatterChart>
+            </ResponsiveContainer>
+        );
+    };
 
-            {selectedView === 'correlation' && (
-                <div className="flex gap-2">
-                    {Object.keys(comparisons).map((key) => (
+    return (
+        <div style={{ background: 'var(--theme)', padding: '1.5rem', maxWidth: '72rem', margin: '0 auto' }}>
+            <div className="flex flex-col gap-4 mb-6">
+                <div className="flex justify-between items-center">
+                    <h1 className="text-base font-bold" style={{ color: 'var(--primary)' }}>
+                        Tableau de bord d'analyse des prix
+                    </h1>
+                    <div className="flex gap-2">
                         <button
-                            key={key}
-                            onClick={() => setSelectedComparison(key)}
+                            onClick={() => setSelectedView('time-series')}
                             className="px-4 py-2 rounded-md"
-                            style={selectedComparison === key ? selectedButtonStyle : buttonStyle}
+                            style={selectedView === 'time-series' ? selectedButtonStyle : buttonStyle}
                         >
-                            {comparisons[key].title}
+                            Série temporelle
                         </button>
-                    ))}
+                        <button
+                            onClick={() => setSelectedView('correlation')}
+                            className="px-4 py-2 rounded-md"
+                            style={selectedView === 'correlation' ? selectedButtonStyle : buttonStyle}
+                        >
+                            Analyse de corrélation
+                        </button>
+                        <button
+                            onClick={() => setShowInfo(!showInfo)}
+                            className="px-4 py-2 rounded-md flex items-center gap-2"
+                            style={showInfo ? selectedButtonStyle : buttonStyle}
+                        >
+                            <span>ℹ️</span>
+                            Informations
+                        </button>
+                    </div>
                 </div>
-            )}
+
+                {selectedView === 'correlation' && (
+                    <div className="flex gap-2">
+                        {Object.keys(comparisons).map((key) => (
+                            <button
+                                key={key}
+                                onClick={() => setSelectedComparison(key)}
+                                className="px-4 py-2 rounded-md"
+                                style={selectedComparison === key ? selectedButtonStyle : buttonStyle}
+                            >
+                                {comparisons[key].title}
+                            </button>
+                        ))}
+                    </div>
+                )}
+            </div>
 
             {showInfo && (
                 <div style={{ 
-                    background: 'var(--entry)',
-                    padding: '1rem'
+                    background: 'var(--chart-annotation-bg)',
+                    borderLeft: '4px solid var(--chart-annotation-line)',
+                    padding: '1rem',
+                    marginBottom: '1.5rem'
                 }}>
-                    <p style={{ color: 'var(--primary)' }}>
+                    <p style={{ color: 'var(--chart-annotation-text)' }}>
                         {selectedView === 'correlation' 
                             ? comparisons[selectedComparison].description
                             : "Cette série temporelle montre la relation entre les prix des matières premières au fil du temps."}
@@ -301,123 +377,10 @@ return (
             <div style={{ 
                 background: 'var(--entry)',
                 padding: '1.5rem',
-                borderRadius: '0.5rem'
+                borderRadius: '0.5rem',
+                marginBottom: '1.5rem'
             }}>
-                {selectedView === 'time-series' ? (
-                    <ResponsiveContainer width="100%" height={500}>
-                        <LineChart
-                            data={timeSeriesData}
-                            margin={{ top: 20, right: 20, left: 20, bottom: 30 }}
-                        >
-                            <CartesianGrid strokeDasharray="3 3" stroke="var(--chart-grid)" />
-                            <XAxis
-                                dataKey="date"
-                                ticks={['2008-Q1', '2012-Q1', '2016-Q1', '2020-Q1', '2022-Q1']}
-                                tickFormatter={(value) => value.split('-')[0]}
-                                stroke="var(--chart-axis)"
-                                label={{
-                                    value: 'Année',
-                                    position: 'bottom',
-                                    offset: 0,
-                                    style: { fill: 'var(--chart-axis)' }
-                                }}
-                            />
-                            <YAxis
-                                domain={[-3, 3]}
-                                ticks={[-3, -2, -1, 0, 1, 2, 3]}
-                                stroke="var(--chart-axis)"
-                                label={{
-                                    value: 'Prix normalisés',
-                                    angle: -90,
-                                    position: 'center',
-                                    dx: -20,
-                                    style: { fill: 'var(--chart-axis)' }
-                                }}
-                            />
-                            <Tooltip content={<TimeSeriesTooltip />} />
-                            <Legend
-                                onMouseEnter={handleMouseEnter}
-                                onMouseLeave={handleMouseLeave}
-                                verticalAlign="top"
-                                height={36}
-                            />
-                            <Line
-                                type="monotone"
-                                dataKey="ammonia"
-                                name="Ammoniac Europe de l'Ouest"
-                                stroke="var(--chart-line-1)"
-                                strokeWidth={2.5}
-                                dot={false}
-                                opacity={opacity.ammonia}
-                            />
-                            <Line
-                                type="monotone"
-                                dataKey="gas"
-                                name="Gaz naturel TTF"
-                                stroke="var(--chart-line-2)"
-                                strokeWidth={2.5}
-                                dot={false}
-                                opacity={opacity.gas}
-                            />
-                            <Line
-                                type="monotone"
-                                dataKey="ets"
-                                name="ETS"
-                                stroke="var(--chart-line-3)"
-                                strokeWidth={2.5}
-                                dot={false}
-                                opacity={opacity.ets}
-                            />
-                        </LineChart>
-                    </ResponsiveContainer>
-                ) : (
-                    <ResponsiveContainer width="100%" height={500}>
-                        <ScatterChart
-                            margin={{ top: 20, right: 20, left: 20, bottom: 30 }}
-                        >
-                            <CartesianGrid strokeDasharray="3 3" stroke="var(--chart-grid)" />
-                            <XAxis
-                                type="number"
-                                dataKey="x"
-                                name={comparisons[selectedComparison].xKey}
-                                stroke="var(--chart-axis)"
-                                domain={[-3, 3]}
-                                label={{
-                                    value: comparisons[selectedComparison].xKey.charAt(0).toUpperCase() + 
-                                           comparisons[selectedComparison].xKey.slice(1),
-                                    position: 'bottom',
-                                    offset: 0,
-                                    style: { fill: 'var(--chart-axis)' }
-                                }}
-                            />
-                            <YAxis
-                                type="number"
-                                dataKey="y"
-                                name={comparisons[selectedComparison].yKey}
-                                stroke="var(--chart-axis)"
-                                domain={[-3, 3]}
-                                label={{
-                                    value: comparisons[selectedComparison].yKey.charAt(0).toUpperCase() + 
-                                           comparisons[selectedComparison].yKey.slice(1),
-                                    angle: -90,
-                                    position: 'left',
-                                    offset: -10,
-                                    style: { fill: 'var(--chart-axis)' }
-                                }}
-                            />
-                            <Tooltip content={<ScatterTooltip />} />
-                            <Scatter
-                                data={scatterData}
-                                fill="var(--chart-line-1)"
-                            />
-                            <Scatter
-                                data={regressionLine}
-                                line={{ stroke: 'var(--chart-line-2)', strokeWidth: 2 }}
-                                shape={() => null}
-                            />
-                        </ScatterChart>
-                    </ResponsiveContainer>
-                )}
+                {selectedView === 'time-series' ? renderTimeSeriesChart() : renderCorrelationChart()}
             </div>
 
             <p style={{ 
@@ -427,5 +390,7 @@ return (
                 Source des données : Bloomberg
             </p>
         </div>
-    </div>
-);
+    );
+};
+
+export default PriceAnalysisDashboard;
