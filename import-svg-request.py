@@ -7,12 +7,18 @@ LUCIDE_BASE_URL = "https://raw.githubusercontent.com/lucide-icons/lucide/main/ic
 ICONS_OUTPUT_DIR = "static/icons/"
 
 # Liste des icônes
+
 ICONS = [
-    "thermometer",
-    "chart-column-stacked",
-    "between-vertical-start",
-    "clock"
-]
+    "square-function",
+    "square-sigma",
+    "waves",
+    "activity",
+    "chart-bar-big",
+    "chart-pie",
+    "boxes",
+    "package",
+    "binary",
+    "code"]
 
 def download_svg_icon(icon_name: str, output_dir: str) -> bool:
     """Télécharge une icône SVG depuis Lucide Icons"""

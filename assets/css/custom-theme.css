@@ -218,6 +218,83 @@ h3,
     color: var(--icon-violet) !important; 
 }
 
+.icon-calculator,
+.icon-abacus { 
+    color: var(--icon-technical) !important; 
+}
+
+.icon-banknote,
+.icon-coins,
+.icon-landmark { 
+    color: var(--icon-indigo) !important; 
+}
+
+.icon-line-chart,
+.icon-trending-up { 
+    color: var(--icon-info) !important; 
+}
+
+.icon-globe,
+.icon-world { 
+    color: var(--icon-implementation) !important; 
+}
+
+.icon-bank,
+.icon-briefcase { 
+    color: var(--icon-solution) !important; 
+}
+
+.icon-database,
+.icon-folder-open { 
+    color: var(--icon-technical) !important; 
+}
+
+.icon-handshake,
+.icon-users-round { 
+    color: var(--icon-implementation) !important; 
+}
+
+.icon-scale,
+.icon-gavel { 
+    color: var(--icon-indigo) !important; 
+}
+
+.icon-test-tube,
+.icon-flask { 
+    color: var(--icon-info) !important; 
+}
+
+.icon-route,
+.icon-milestone { 
+    color: var(--icon-solution) !important; 
+}
+
+.icon-square-function,
+.icon-square-sigma { 
+    color: var(--icon-technical) !important; 
+}
+
+.icon-waves,
+.icon-activity { 
+    color: var(--icon-info) !important; 
+}
+
+.icon-bar-chart-4,
+.icon-pie-chart { 
+    color: var(--icon-implementation) !important; 
+}
+
+.icon-boxes,
+.icon-package { 
+    color: var(--icon-indigo) !important; 
+}
+
+.icon-binary,
+.icon-code-2 { 
+    color: var(--icon-violet) !important; 
+}
+
+
 /* ==========================================================================
    Composants - Sections
    ========================================================================== */

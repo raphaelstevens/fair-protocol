@@ -17,7 +17,7 @@ Global temperatures have already breached 1.5°C of warming temporarily, with 20
 
 Current published oil and gas reserves far exceed the remaining carbon budget for a safe and stable climate. The continued expansion of fossil fuel investments is fundamentally incompatible with maintaining a livable planet, demanding an urgent transformation in energy investment decisions.
 
-[Learn more about carbon budgets](/en/challenge/carbon-budget-reality) &rarr;
+[Learn more about carbon budgets](/en/challenge/carbon-budget) &rarr;
 
 {{< /section >}}
 
