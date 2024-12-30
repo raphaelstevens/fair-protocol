@@ -34,7 +34,7 @@ const CarbonBudgetChart = () => {
   };
 
   const titleStyle = {
-    fontSize: '1.125rem',
+    fontSize: '1rem',
     fontWeight: 'bold',
     color: 'var(--primary)',
     marginBottom: '1rem'

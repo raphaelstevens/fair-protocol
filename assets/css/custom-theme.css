@@ -10,7 +10,7 @@
     --tertiary: #E6EEF4;       /* Accents tertiaires */
     --content: #1B365D;        /* Couleur principale du contenu */
 
-    /* Variables sémantiques pour les icônes */
+    /* Variables sémantiques pour les icônes  */
     --icon-info: #4A90E2;        /* Bleu information */
     --icon-challenge: #D43C3C;   /* Rouge challenge/alerte */
     --icon-solution: #5BAE6E;    /* Vert solution */
@@ -28,16 +28,20 @@
     --chart-bg: var(--entry);
     --chart-title-text: var(--primary);
     --chart-subtitle-text: var(--secondary);
-    --chart-grid: #E2E8F0;
+    --chart-grid: #4A5568;
 
     /* Axes */
     --chart-axis: #718096;
     --chart-axis-label: var(--primary);
 
     /* Lignes du graphique */
-    --chart-line-1: #4A90E2;  /* Bleu pour ammonia */
-    --chart-line-2: #5BAE6E;  /* Vert pour gas */
-    --chart-line-3: #D43C3C;  /* Rouge pour ets */
+    --chart-line-1: #4A90E2;  
+    --chart-line-2: #D43C3C;  
+    --chart-line-3: #5BAE6E;  
+    --chart-line-4: #4A90E2;  
+    --chart-line-5: #DAC04A;  
+    --chart-line-6: #6473B3;  
+    --chart-line-7: #9967C4;  
 
     /* Tooltip */
     --chart-tooltip-bg: var(--entry);
@@ -93,10 +97,14 @@
     --chart-axis: #9CA3AF;
     --chart-axis-label: var(--primary);
 
-    /* Lignes du graphique - versions plus claires pour le mode sombre */
-    --chart-line-1: #60A5FA;  /* Bleu plus clair */
-    --chart-line-2: #6EE7B7;  /* Vert plus clair */
-    --chart-line-3: #F87171;  /* Rouge plus clair */
+    /* Lignes du graphique */
+    --chart-line-1: #5BA4D8;  
+    --chart-line-2: #E57373;  
+    --chart-line-3: #69C17C;  
+    --chart-line-4: #5BA4D8;  
+    --chart-line-5: #E2C94D;  
+    --chart-line-6: #7681C7;  
+    --chart-line-7: #A47DCB;  
 
     /* Tooltip */
     --chart-tooltip-bg: var(--entry);
