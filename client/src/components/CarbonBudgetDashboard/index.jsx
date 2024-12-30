@@ -55,9 +55,9 @@ const CarbonBudgetChart = () => {
   return (
     <div className="p-6 w-full" style={{ backgroundColor: 'var(--theme)' }}>
       <div className="flex justify-between items-center mb-6">
-        <h2 className="text-sm font-bold" style={{ color: 'var(--primary)' }}>
+        <h1 className="text-sm font-bold" style={{ color: 'var(--primary)' }}>
           Carbon Budget vs Fossil Fuel Reserves
-        </h2>
+        </h1>
 <button
   onClick={() => setShowCoal(!showCoal)}
   style={{
@@ -66,8 +66,8 @@ const CarbonBudgetChart = () => {
     padding: '8px 12px', // Plus grand padding pour un vrai bouton
     borderRadius: '3px', // Coins arrondis
     marginRight: '24px',
-    marginTop: '24px',
-    marginBottom: '24px',
+    marginTop: '2px',
+    marginBottom: '22px',
     cursor: 'pointer', // Curseur clic
     transition: 'all 0.3s ease', // Transition pour hover/clic
   }}
@@ -95,6 +95,7 @@ const CarbonBudgetChart = () => {
       <div style={{ 
         backgroundColor: 'var(--chart-bg)',
         height: '400px'
+        borderRadius: '3px',
       }} className="p-6 rounded-lg">
         <ResponsiveContainer>
           <BarChart
@@ -132,7 +133,7 @@ const CarbonBudgetChart = () => {
                 }
                 return entry.name === 'Safe Climate Budget' 
                   ? 'var(--icon-solution)' 
-                  : 'var(--chart-line-1)';
+                  : 'var(--chart-line-2)';
               }}
               radius={[0, 4, 4, 0]}
             />
