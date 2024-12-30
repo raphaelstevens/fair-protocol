@@ -87,6 +87,8 @@ const CarbonBudgetChart = () => {
 >
   {showCoal ? "⊖ Hide Coal Reserves" : "⊕ Add Coal Reserves"}
 </button>
+
+      </div>
       
       <div style={{ 
         backgroundColor: 'var(--chart-bg)',
