@@ -62,25 +62,26 @@ const timeSeriesData = [
     { date: '2022-Q1', ammonia: 2.45, gas: 2.55, ets: 1.85 }
 
 ];
+
 const comparisons = {
-  ammonia_gas: {
-    title: 'Ammonia vs Natural Gas',
-    xKey: 'ammonia',
-    yKey: 'gas',
-    description: 'La forte corrélation positive montre comment les prix de l\'ammoniac (production d\'engrais) sont étroitement liés aux prix du gaz naturel, soulignant notre dépendance agricole aux combustibles fossiles.',
-  },
-  ammonia_ets: {
-    title: 'Ammonia vs ETS',
-    xKey: 'ammonia',
-    yKey: 'ets',
-    description: 'La corrélation négative suggère que les mécanismes actuels de tarification du carbone (ETS) ont une influence limitée sur les décisions de production d\'ammoniac.',
-  },
-  gas_ets: {
-    title: 'Natural Gas vs ETS',
-    xKey: 'gas',
-    yKey: 'ets',
-    description: 'La corrélation négative indique que les prix du carbone n\'influencent pas efficacement la dynamique du marché du gaz naturel.',
-  }
+    ammonia_gas: {
+        title: 'Ammonia vs Natural Gas',
+        xKey: 'ammonia',
+        yKey: 'gas',
+        description: 'La forte corrélation positive montre comment les prix de l\'ammoniac (production d\'engrais) sont étroitement liés aux prix du gaz naturel, soulignant notre dépendance agricole aux combustibles fossiles.',
+    },
+    ammonia_ets: {
+        title: 'Ammonia vs ETS',
+        xKey: 'ammonia',
+        yKey: 'ets',
+        description: 'La corrélation négative suggère que les mécanismes actuels de tarification du carbone (ETS) ont une influence limitée sur les décisions de production d\'ammoniac.',
+    },
+    gas_ets: {
+        title: 'Natural Gas vs ETS',
+        xKey: 'gas',
+        yKey: 'ets',
+        description: 'La corrélation négative indique que les prix du carbone n\'influencent pas efficacement la dynamique du marché du gaz naturel.',
+    }
 };
 
 // Utility function for regression calculation
@@ -116,8 +117,15 @@ const calculateRegression = (data, xKey, yKey) => {
 const TimeSeriesTooltip = ({ active, payload, label }) => {
     if (active && payload && payload.length) {
         return (
-            <div className="bg-white p-4 rounded shadow-lg border border-gray-200">
-                <p className="font-semibold mb-2">{label}</p>
+            <div style={{
+                background: 'var(--chart-tooltip-bg)',
+                border: '1px solid var(--chart-tooltip-border)',
+                padding: '1rem',
+                borderRadius: '0.375rem'
+            }}>
+                <p style={{ color: 'var(--chart-tooltip-text)', fontWeight: 600, marginBottom: '0.5rem' }}>
+                    {label}
+                </p>
                 {payload.map((entry, index) => (
                     <p key={index} style={{ color: entry.color }}>
                         {entry.name}: {entry.value.toFixed(2)}
@@ -132,10 +140,17 @@ const TimeSeriesTooltip = ({ active, payload, label }) => {
 const ScatterTooltip = ({ active, payload }) => {
     if (active && payload && payload.length) {
         return (
-            <div className="bg-white p-4 rounded shadow-lg border border-gray-200">
-                <p className="font-semibold mb-2">{payload[0].payload.date}</p>
-                <p>X: {payload[0].value.toFixed(2)}</p>
-                <p>Y: {payload[1].value.toFixed(2)}</p>
+            <div style={{
+                background: 'var(--chart-tooltip-bg)',
+                border: '1px solid var(--chart-tooltip-border)',
+                padding: '1rem',
+                borderRadius: '0.375rem'
+            }}>
+                <p style={{ color: 'var(--chart-tooltip-text)', fontWeight: 600, marginBottom: '0.5rem' }}>
+                    {payload[0].payload.date}
+                </p>
+                <p style={{ color: 'var(--chart-tooltip-text)' }}>X: {payload[0].value.toFixed(2)}</p>
+                <p style={{ color: 'var(--chart-tooltip-text)' }}>Y: {payload[1].value.toFixed(2)}</p>
             </div>
         );
     }
@@ -162,35 +177,47 @@ const PriceAnalysisDashboard = () => {
         setOpacity({ ammonia: 1, gas: 1, ets: 1 });
     };
 
+    const buttonStyle = {
+        background: 'var(--chart-button-bg)',
+        color: 'var(--chart-button-text)',
+        border: '1px solid var(--border)'
+    };
+
+    const selectedButtonStyle = {
+        background: 'var(--chart-button-bg-select)',
+        color: 'var(--chart-button-text-select)',
+        border: '1px solid var(--border)'
+    };
+
     const renderTimeSeriesChart = () => (
         <ResponsiveContainer width="100%" height={500}>
             <LineChart
                 data={timeSeriesData}
                 margin={{ top: 20, right: 20, left: 20, bottom: 30 }}
             >
-                <CartesianGrid strokeDasharray="3 3" stroke="#E2E8F0" opacity={0.2} />
+                <CartesianGrid strokeDasharray="3 3" stroke="var(--chart-grid)" />
                 <XAxis
                     dataKey="date"
                     ticks={['2008-Q1', '2012-Q1', '2016-Q1', '2020-Q1', '2022-Q1']}
                     tickFormatter={(value) => value.split('-')[0]}
-                    stroke="#718096"
+                    stroke="var(--chart-axis)"
                     label={{
                         value: 'Année',
                         position: 'bottom',
                         offset: 0,
-                        style: { fill: '#718096' }
+                        style: { fill: 'var(--chart-axis)' }
                     }}
                 />
                 <YAxis
                     domain={[-3, 3]}
                     ticks={[-3, -2, -1, 0, 1, 2, 3]}
-                    stroke="#718096"
+                    stroke="var(--chart-axis)"
                     label={{
                         value: 'Prix normalisés',
                         angle: -90,
                         position: 'center',
                         dx: -20,
-                        style: { fill: '#718096' }
+                        style: { fill: 'var(--chart-axis)' }
                     }}
                 />
                 <Tooltip content={<TimeSeriesTooltip />} />
@@ -204,7 +231,7 @@ const PriceAnalysisDashboard = () => {
                     type="monotone"
                     dataKey="ammonia"
                     name="Ammoniac Europe de l'Ouest"
-                    stroke="#1f77b4"
+                    stroke="var(--chart-line-1)"
                     strokeWidth={2.5}
                     dot={false}
                     opacity={opacity.ammonia}
@@ -213,7 +240,7 @@ const PriceAnalysisDashboard = () => {
                     type="monotone"
                     dataKey="gas"
                     name="Gaz naturel TTF"
-                    stroke="#ff7f0e"
+                    stroke="var(--chart-line-2)"
                     strokeWidth={2.5}
                     dot={false}
                     opacity={opacity.gas}
@@ -222,7 +249,7 @@ const PriceAnalysisDashboard = () => {
                     type="monotone"
                     dataKey="ets"
                     name="ETS"
-                    stroke="#2ca02c"
+                    stroke="var(--chart-line-3)"
                     strokeWidth={2.5}
                     dot={false}
                     opacity={opacity.ets}
@@ -245,39 +272,39 @@ const PriceAnalysisDashboard = () => {
                 <ScatterChart
                     margin={{ top: 20, right: 20, left: 20, bottom: 30 }}
                 >
-                    <CartesianGrid strokeDasharray="3 3" stroke="#E2E8F0" opacity={0.2} />
+                    <CartesianGrid strokeDasharray="3 3" stroke="var(--chart-grid)" />
                     <XAxis
                         type="number"
                         dataKey="x"
                         name={comparison.xKey}
-                        stroke="#718096"
+                        stroke="var(--chart-axis)"
                         domain={[-3, 3]}
                         label={{
                             value: comparison.xKey.charAt(0).toUpperCase() + comparison.xKey.slice(1),
                             position: 'bottom',
                             offset: 0,
-                            style: { fill: '#718096' }
+                            style: { fill: 'var(--chart-axis)' }
                         }}
                     />
                     <YAxis
                         type="number"
                         dataKey="y"
                         name={comparison.yKey}
-                        stroke="#718096"
+                        stroke="var(--chart-axis)"
                         domain={[-3, 3]}
                         label={{
                             value: comparison.yKey.charAt(0).toUpperCase() + comparison.yKey.slice(1),
                             angle: -90,
                             position: 'left',
                             offset: -10,
-                            style: { fill: '#718096' }
+                            style: { fill: 'var(--chart-axis)' }
                         }}
                     />
                     <Tooltip content={<ScatterTooltip />} />
-                    <Scatter data={scatterData} fill="#1f77b4" />
+                    <Scatter data={scatterData} fill="var(--chart-line-1)" />
                     <Scatter
                         data={regressionLine}
-                        line={{ stroke: '#ff7f0e', strokeWidth: 2 }}
+                        line={{ stroke: 'var(--chart-line-2)', strokeWidth: 2 }}
                         shape={() => null}
                     />
                 </ScatterChart>
@@ -286,40 +313,31 @@ const PriceAnalysisDashboard = () => {
     };
 
     return (
-        <div className="bg-white rounded-lg p-6 max-w-6xl mx-auto">
+        <div style={{ background: 'var(--theme)', padding: '1.5rem', maxWidth: '72rem', margin: '0 auto' }}>
             <div className="flex flex-col gap-4 mb-6">
                 <div className="flex justify-between items-center">
-                    <h1 className="text-2xl font-bold" style={{ color: 'var(--primary)' }}>
+                    <h1 className="text-base font-bold" style={{ color: 'var(--primary)' }}>
                         Tableau de bord d'analyse des prix
                     </h1>
                     <div className="flex gap-2">
                         <button
                             onClick={() => setSelectedView('time-series')}
                             className="px-4 py-2 rounded-md"
-                            style={{
-                                background: selectedView === 'time-series' ? 'var(--primary)' : 'var(--entry)',
-                                color: selectedView === 'time-series' ? 'var(--entry)' : 'var(--primary)'
-                            }}
+                            style={selectedView === 'time-series' ? selectedButtonStyle : buttonStyle}
                         >
                             Série temporelle
                         </button>
                         <button
                             onClick={() => setSelectedView('correlation')}
                             className="px-4 py-2 rounded-md"
-                            style={{
-                                background: selectedView === 'correlation' ? 'var(--primary)' : 'var(--entry)',
-                                color: selectedView === 'correlation' ? 'var(--entry)' : 'var(--primary)'
-                            }}
+                            style={selectedView === 'correlation' ? selectedButtonStyle : buttonStyle}
                         >
                             Analyse de corrélation
                         </button>
                         <button
                             onClick={() => setShowInfo(!showInfo)}
                             className="px-4 py-2 rounded-md flex items-center gap-2"
-                            style={{
-                                background: showInfo ? 'var(--primary)' : 'var(--entry)',
-                                color: showInfo ? 'var(--entry)' : 'var(--primary)'
-                            }}
+                            style={showInfo ? selectedButtonStyle : buttonStyle}
                         >
                             <span>ℹ️</span>
                             Informations
@@ -334,10 +352,7 @@ const PriceAnalysisDashboard = () => {
                                 key={key}
                                 onClick={() => setSelectedComparison(key)}
                                 className="px-4 py-2 rounded-md"
-                                style={{
-                                    background: selectedComparison === key ? 'var(--primary)' : 'var(--entry)',
-                                    color: selectedComparison === key ? 'var(--entry)' : 'var(--primary)'
-                                }}
+                                style={selectedComparison === key ? selectedButtonStyle : buttonStyle}
                             >
                                 {comparisons[key].title}
                             </button>
@@ -347,8 +362,13 @@ const PriceAnalysisDashboard = () => {
             </div>
 
             {showInfo && (
-                <div className="bg-blue-50 border-l-4 border-blue-500 p-4 mb-6">
-                    <p className="text-blue-700">
+                <div style={{ 
+                    background: 'var(--chart-annotation-bg)',
+                    borderLeft: '4px solid var(--chart-annotation-line)',
+                    padding: '1rem',
+                    marginBottom: '1.5rem'
+                }}>
+                    <p style={{ color: 'var(--chart-annotation-text)' }}>
                         {selectedView === 'correlation' 
                             ? comparisons[selectedComparison].description
                             : "Cette série temporelle montre la relation entre les prix des matières premières au fil du temps."}
@@ -356,11 +376,21 @@ const PriceAnalysisDashboard = () => {
                 </div>
             )}
 
-            <div className="bg-gray-50 p-6 rounded-lg mb-6">
+            <div style={{ 
+                background: 'var(--entry)',
+                padding: '1.5rem',
+                borderRadius: '0.5rem',
+                marginBottom: '1.5rem'
+            }}>
                 {selectedView === 'time-series' ? renderTimeSeriesChart() : renderCorrelationChart()}
             </div>
 
-            <p className="text-right text-gray-600">Source des données : Bloomberg</p>
+            <p style={{ 
+                textAlign: 'right',
+                color: 'var(--secondary)'
+            }}>
+                Source des données : Bloomberg
+            </p>
         </div>
     );
 };
