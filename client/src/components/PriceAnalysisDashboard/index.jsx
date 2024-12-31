@@ -63,7 +63,6 @@ const timeSeriesData = [
 
 ];
 
-
 const comparisons = {
     ammonia_gas: {
         title: 'Ammonia vs Natural Gas',
@@ -118,17 +117,10 @@ const calculateRegression = (data, xKey, yKey) => {
 const TimeSeriesTooltip = ({ active, payload, label }) => {
     if (active && payload && payload.length) {
         return (
-            <div style={{
-                background: 'var(--chart-tooltip-bg)',
-                border: '1px solid var(--chart-tooltip-border)',
-                padding: '1rem',
-                borderRadius: '0.375rem'
-            }}>
-                <p style={{ color: 'var(--chart-tooltip-text)', fontWeight: 600, marginBottom: '0.5rem' }}>
-                    {label}
-                </p>
+            <div className="chart-tooltip">
+                <p className="chart-tooltip-label">{label}</p>
                 {payload.map((entry, index) => (
-                    <p key={index} style={{ color: entry.color }}>
+                    <p key={index} className="chart-tooltip-value" style={{ color: entry.color }}>
                         {entry.name}: {entry.value.toFixed(2)}
                     </p>
                 ))}
@@ -141,17 +133,10 @@ const TimeSeriesTooltip = ({ active, payload, label }) => {
 const ScatterTooltip = ({ active, payload }) => {
     if (active && payload && payload.length) {
         return (
-            <div style={{
-                background: 'var(--chart-tooltip-bg)',
-                border: '1px solid var(--chart-tooltip-border)',
-                padding: '1rem',
-                borderRadius: '0.375rem'
-            }}>
-                <p style={{ color: 'var(--chart-tooltip-text)', fontWeight: 600, marginBottom: '0.5rem' }}>
-                    {payload[0].payload.date}
-                </p>
-                <p style={{ color: 'var(--chart-tooltip-text)' }}>X: {payload[0].value.toFixed(2)}</p>
-                <p style={{ color: 'var(--chart-tooltip-text)' }}>Y: {payload[1].value.toFixed(2)}</p>
+            <div className="chart-tooltip">
+                <p className="chart-tooltip-label">{payload[0].payload.date}</p>
+                <p className="chart-tooltip-value">X: {payload[0].value.toFixed(2)}</p>
+                <p className="chart-tooltip-value">Y: {payload[1].value.toFixed(2)}</p>
             </div>
         );
     }
@@ -304,30 +289,30 @@ const PriceAnalysisDashboard = () => {
     return (
         <div className="dashboard-container">
             <div className="dashboard-header">
-                <h3 className="dashboard-title">
-                    Tableau de bord d'analyse des prix
-                </h3><p></p>
-                <div className="dashboard-buttons">
-                    <button
-                        onClick={() => setSelectedView('time-series')}
-                        className={`dashboard-button ${selectedView === 'time-series' ? 'selected' : ''}`}
-                    >
-                        Série temporelle
-                    </button>
-                    <button
-                        onClick={() => setSelectedView('correlation')}
-                        className={`dashboard-button ${selectedView === 'correlation' ? 'selected' : ''}`}
-                    >
-                        Analyse de corrélation
-                    </button>
-                    <button
-                        onClick={() => setShowInfo(!showInfo)}
-                        className={`dashboard-button ${showInfo ? 'selected' : ''}`}
-                    >
-                        <span>ℹ️</span>
-                        Informations
-                    </button>
+                <div className="dashboard-title">
+                    <h3>Tableau de bord d'analyse des prix</h3>
                 </div>
+            </div>
+            <div className="dashboard-buttons">
+                <button
+                    onClick={() => setSelectedView('time-series')}
+                    className={`dashboard-button ${selectedView === 'time-series' ? 'selected' : ''}`}
+                >
+                    Série temporelle
+                </button>
+                <button
+                    onClick={() => setSelectedView('correlation')}
+                    className={`dashboard-button ${selectedView === 'correlation' ? 'selected' : ''}`}
+                >
+                    Analyse de corrélation
+                </button>
+                <button
+                    onClick={() => setShowInfo(!showInfo)}
+                    className={`dashboard-button ${showInfo ? 'selected' : ''}`}
+                >
+                    <span>ℹ️</span>
+                    Informations
+                </button>
             </div>
 
             {selectedView === 'correlation' && (
