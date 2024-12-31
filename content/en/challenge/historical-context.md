@@ -21,7 +21,7 @@ The visualization of normalized prices reveals how tightly coupled ammonia (key 
 The strong positive correlation between ammonia and natural gas prices demonstrates our continuing dependence on fossil fuels for food security. Meanwhile, the disconnection with carbon prices (ETS) shows the limitations of current market mechanisms to drive transition.
 
 ### Learning from Success: The Danish Response
-<br*<
+<br>
 Denmark's response to the 1973 crisis offers a powerful model of successful transformation. Facing potential blackouts and economic disruption, Denmark made a strategic choice to transform its energy system. Within a generation, the country evolved from near-complete fossil fuel dependency to becoming a world leader in wind energy. This transformation wasn't just about changing energy sources - it required reimagining their entire approach to energy security and economic development.
 
 ### Modern Parallels

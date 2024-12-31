@@ -63,6 +63,7 @@ const timeSeriesData = [
 
 ];
 
+
 const comparisons = {
     ammonia_gas: {
         title: 'Ammonia vs Natural Gas',
@@ -175,32 +176,6 @@ const PriceAnalysisDashboard = () => {
 
     const handleMouseLeave = () => {
         setOpacity({ ammonia: 1, gas: 1, ets: 1 });
-    };
-
-    const buttonStyle = {
-        backgroundColor: 'var(--chart-button-bg)',
-        color: 'var(--chart-button-text)',
-        transition: 'all 0.2s ease',
-        padding: '0.5rem 1.5rem',
-        borderRadius: '0.375rem',
-        display: 'flex',
-        alignItems: 'center',
-        marginRight: '1rem',        // Marge fixe entre les boutons
-        marginTop: '0.125rem',      // 2px
-        marginBottom: '1.375rem'    // 22px
-    };
-
-    const selectedButtonStyle = {
-        backgroundColor: 'var(--chart-button-bg-select)',
-        color: 'var(--chart-button-text-select)',
-        transition: 'all 0.2s ease',
-        padding: '0.5rem 1.5rem',
-        borderRadius: '0.375rem',
-        display: 'flex',
-        alignItems: 'center',
-        marginRight: '1rem',        // Marge fixe entre les boutons
-        marginTop: '0.125rem',      // 2px
-        marginBottom: '1.375rem'    // 22px
     };
 
     const renderTimeSeriesChart = () => (
@@ -327,82 +302,62 @@ const PriceAnalysisDashboard = () => {
     };
 
     return (
-        <div style={{ background: 'var(--theme)', padding: '1.5rem', maxWidth: '72rem', margin: '0 auto' }}>
-            <div className="flex flex-col gap-4 mb-6">
-                <div className="flex justify-between items-center">
-                    <h3 className="text-base font-medium mb-6" style={{ color: 'var(--primary)' }}>
-                        Tableau de bord d'analyse des prix
-                    </h3>
-                    <div className="flex">
-                        <button
-                            onClick={() => setSelectedView('time-series')}
-                            className="px-6 rounded-md"
-                            style={selectedView === 'time-series' ? selectedButtonStyle : buttonStyle}
-                        >
-                            Série temporelle
-                        </button>
-                        <button
-                            onClick={() => setSelectedView('correlation')}
-                            className="px-6 rounded-md"
-                            style={selectedView === 'correlation' ? selectedButtonStyle : buttonStyle}
-                        >
-                            Analyse de corrélation
-                        </button>
-                        <button
-                            onClick={() => setShowInfo(!showInfo)}
-                            className="px-6 rounded-md flex items-center gap-2"
-                            style={showInfo ? selectedButtonStyle : buttonStyle}
-                        >
-                            <span>ℹ️</span>
-                            Informations
-                        </button>
-                    </div>
+        <div className="dashboard-container">
+            <div className="dashboard-header">
+                <h3 className="dashboard-title">
+                    Tableau de bord d'analyse des prix
+                </h3>
+                <div className="dashboard-buttons">
+                    <button
+                        onClick={() => setSelectedView('time-series')}
+                        className={`dashboard-button ${selectedView === 'time-series' ? 'selected' : ''}`}
+                    >
+                        Série temporelle
+                    </button>
+                    <button
+                        onClick={() => setSelectedView('correlation')}
+                        className={`dashboard-button ${selectedView === 'correlation' ? 'selected' : ''}`}
+                    >
+                        Analyse de corrélation
+                    </button>
+                    <button
+                        onClick={() => setShowInfo(!showInfo)}
+                        className={`dashboard-button ${showInfo ? 'selected' : ''}`}
+                    >
+                        <span>ℹ️</span>
+                        Informations
+                    </button>
                 </div>
-
-                {selectedView === 'correlation' && (
-                    <div className="flex gap-2">
-                        {Object.keys(comparisons).map((key) => (
-                            <button
-                                key={key}
-                                onClick={() => setSelectedComparison(key)}
-                                className="px-6 rounded-md"
-                                style={selectedComparison === key ? selectedButtonStyle : buttonStyle}
-                            >
-                                {comparisons[key].title}
-                            </button>
-                        ))}
-                    </div>
-                )}
             </div>
 
+            {selectedView === 'correlation' && (
+                <div className="dashboard-buttons">
+                    {Object.keys(comparisons).map((key) => (
+                        <button
+                            key={key}
+                            onClick={() => setSelectedComparison(key)}
+                            className={`dashboard-button ${selectedComparison === key ? 'selected' : ''}`}
+                        >
+                            {comparisons[key].title}
+                        </button>
+                    ))}
+                </div>
+            )}
+
             {showInfo && (
-                <div style={{ 
-                    background: 'var(--chart-annotation-bg)',
-                    borderLeft: '4px solid var(--chart-annotation-line)',
-                    padding: '1rem',
-                    marginBottom: '1.5rem'
-                }}>
-                    <p style={{ color: 'var(--chart-annotation-text)' }}>
-                        {selectedView === 'correlation' 
-                            ? comparisons[selectedComparison].description
-                            : "Cette série temporelle montre la relation entre les prix des matières premières au fil du temps."}
+                <div className="dashboard-info">
+                    <p>{selectedView === 'correlation' 
+                        ? comparisons[selectedComparison].description
+                        : "Cette série temporelle montre la relation entre les prix des matières premières au fil du temps."}
                     </p>
                 </div>
             )}
 
-            <div style={{ 
-                background: 'var(--entry)',
-                padding: '1.5rem',
-                borderRadius: '0.5rem',
-                marginBottom: '1.5rem'
-            }}>
+            <div className="dashboard-chart-container">
                 {selectedView === 'time-series' ? renderTimeSeriesChart() : renderCorrelationChart()}
             </div>
 
-            <p style={{ 
-                textAlign: 'right',
-                color: 'var(--secondary)'
-            }}>
+            <p className="dashboard-source">
                 Source des données : Bloomberg
             </p>
         </div>
