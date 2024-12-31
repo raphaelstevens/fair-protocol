@@ -306,7 +306,7 @@ const PriceAnalysisDashboard = () => {
             <div className="dashboard-header">
                 <h3 className="dashboard-title">
                     Tableau de bord d'analyse des prix
-                </h3>
+                </h3><p></p>
                 <div className="dashboard-buttons">
                     <button
                         onClick={() => setSelectedView('time-series')}
