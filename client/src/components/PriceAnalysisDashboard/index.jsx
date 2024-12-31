@@ -178,21 +178,29 @@ const PriceAnalysisDashboard = () => {
     };
 
     const buttonStyle = {
-        background: 'var(--chart-button-bg)',
-        color: 'var(--chart-button-text)', 
-        marginRight: '24px',
-        marginTop: '2px',
-        marginBottom: '22px',
-        padding: '8px 12px'
+        backgroundColor: 'var(--chart-button-bg)',
+        color: 'var(--chart-button-text)',
+        transition: 'all 0.2s ease',
+        padding: '0.5rem 1.5rem',
+        borderRadius: '0.375rem',
+        display: 'flex',
+        alignItems: 'center',
+        marginRight: '1rem',        // Marge fixe entre les boutons
+        marginTop: '0.125rem',      // 2px
+        marginBottom: '1.375rem'    // 22px
     };
 
     const selectedButtonStyle = {
-        background: 'var(--chart-button-bg-select)',
+        backgroundColor: 'var(--chart-button-bg-select)',
         color: 'var(--chart-button-text-select)',
-        marginRight: '24px',
-        marginTop: '2px',
-        marginBottom: '22px',
-        padding: '8px 12px'
+        transition: 'all 0.2s ease',
+        padding: '0.5rem 1.5rem',
+        borderRadius: '0.375rem',
+        display: 'flex',
+        alignItems: 'center',
+        marginRight: '1rem',        // Marge fixe entre les boutons
+        marginTop: '0.125rem',      // 2px
+        marginBottom: '1.375rem'    // 22px
     };
 
     const renderTimeSeriesChart = () => (
@@ -322,10 +330,10 @@ const PriceAnalysisDashboard = () => {
         <div style={{ background: 'var(--theme)', padding: '1.5rem', maxWidth: '72rem', margin: '0 auto' }}>
             <div className="flex flex-col gap-4 mb-6">
                 <div className="flex justify-between items-center">
-                    <h3 className="text-base font-medium" style={{ color: 'var(--primary)' }}>
+                    <h3 className="text-base font-medium mb-6" style={{ color: 'var(--primary)' }}>
                         Tableau de bord d'analyse des prix
                     </h3>
-                    <div className="flex gap-2">
+                    <div className="flex">
                         <button
                             onClick={() => setSelectedView('time-series')}
                             className="px-6 rounded-md"

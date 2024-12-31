@@ -14,6 +14,8 @@ The transition faces a fundamental economic challenge: clean energy infrastructu
 - Wind power facility: ~$1,500 per kilowatt of capacity
 - Nuclear power plant: ~$6,600 per kilowatt of capacity
 
+{{< react component="InvestmentSimulator" >}}
+
 Our existing financial systems have evolved around fossil fuel development over more than a century. These established mechanisms make it easier and often more profitable to finance traditional energy projects than clean alternatives. Banking systems, investment frameworks, and risk assessment tools all need to evolve to support the energy transition effectively.
 
 Energy security concerns often compete with climate goals for investment priorities. Recent global events have highlighted how vulnerable our energy systems are to disruption, leading some nations to double down on fossil fuel investments despite climate commitments. Breaking this cycle requires new approaches that address both security and sustainability.
