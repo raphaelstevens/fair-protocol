@@ -2,22 +2,3 @@
 @tailwind components;
 @tailwind utilities;
 
-@layer base {
-  body {
-    @apply bg-white m-0 min-w-[320px];
-    font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-  }
-}
-
-@layer components {
-  .recharts-cartesian-grid-horizontal line,
-  .recharts-cartesian-grid-vertical line {
-    @apply stroke-gray-200;
-  }
-  .recharts-wrapper {
-    width: 100% !important;
-    height: 100% !important;
-  }
-}

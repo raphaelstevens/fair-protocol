@@ -9,7 +9,7 @@ layout: "section"
 
 Global temperatures have already breached 1.5°C of warming temporarily, with 2023 and 2024 setting alarming new records. This is no longer a future threat but a present reality, making the transformation of our energy systems an immediate imperative rather than a long-term consideration.
 
-[Understand climate impacts](/en/challenge/climate-emergency) &rarr;
+[Understand climate impacts](/en/challenge/climate-crisis) &rarr;
 
 {{< /section >}}
 
