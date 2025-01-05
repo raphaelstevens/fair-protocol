@@ -1,83 +1,43 @@
 import React, { useState } from 'react';
-import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, LineChart, Line } from 'recharts';
-
-// Données sourcées du document
-const technologyData = [
-    { 
-        name: 'Puits pétrolier',
-        capex: 253,
-        category: 'Fossile'
-    },
-    { 
-        name: 'Turbine à gaz CC',
-        capex: 1000,
-        category: 'Fossile'
-    },
-    { 
-        name: 'H₂ reformage gaz',
-        capex: 910,
-        category: 'Transition'
-    },
-    { 
-        name: 'H₂ reformage + CCS',
-        capex: 1360,
-        category: 'Transition'
-    },
-    { 
-        name: 'Éolien terrestre',
-        capex: 1590,
-        category: 'Renouvelable'
-    },
-    { 
-        name: 'Éolien offshore',
-        capex: 3040,
-        category: 'Renouvelable'
-    },
-    { 
-        name: 'Nucléaire',
-        capex: 6600,
-        category: 'Bas carbone'
-    }
-];
-
-// Écart d'investissement (données du document)
-const investmentGapData = [
-    { year: 2024, current: 1.8, required: 4.5 },
-    { year: 2025, current: 2.0, required: 4.5 },
-    { year: 2026, current: 2.2, required: 4.5 },
-    { year: 2027, current: 2.4, required: 4.5 },
-    { year: 2028, current: 2.6, required: 4.5 },
-    { year: 2029, current: 2.8, required: 4.5 },
-    { year: 2030, current: 3.0, required: 4.5 }
-];
+import { BarChart, Bar, LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 
 const EnergyTransitionDashboard = () => {
-    const [selectedCategory, setSelectedCategory] = useState('all');
     const [showInfo, setShowInfo] = useState(false);
+    const [selectedCategory, setSelectedCategory] = useState('all');
+
+    // Données mock pour les coûts d'investissement
+    const data = [
+        { name: 'Gaz naturel', capex: 1000, category: 'Fossile' },
+        { name: 'Pétrole', capex: 590, category: 'Fossile' },
+        { name: 'H2 via gaz', capex: 910, category: 'Transition' },
+        { name: 'H2 avec CCS', capex: 1360, category: 'Transition' },
+        { name: 'Éolien terrestre', capex: 1590, category: 'Renouvelable' },
+        { name: 'Éolien offshore', capex: 3040, category: 'Renouvelable' },
+        { name: 'Nucléaire', capex: 6600, category: 'Bas carbone' }
+    ];
 
     const filteredData = selectedCategory === 'all' 
-        ? technologyData 
-        : technologyData.filter(tech => tech.category === selectedCategory);
+        ? data 
+        : data.filter(item => item.category === selectedCategory);
+
+    // Données mock pour l'écart d'investissement
+    const investmentGapData = [
+        { year: 2024, current: 1.8, required: 4.0 },
+        { year: 2025, current: 2.0, required: 4.1 },
+        { year: 2026, current: 2.2, required: 4.2 },
+        { year: 2027, current: 2.4, required: 4.3 },
+        { year: 2028, current: 2.6, required: 4.4 },
+        { year: 2029, current: 2.8, required: 4.4 },
+        { year: 2030, current: 3.0, required: 4.5 }
+    ];
 
     const CustomTooltip = ({ active, payload, label }) => {
         if (active && payload && payload.length) {
-            const data = payload[0].payload;
             return (
-                <div style={{ 
-                    backgroundColor: 'var(--chart-tooltip-bg)',
-                    border: '1px solid var(--chart-tooltip-border)',
-                    padding: '16px',
-                    borderRadius: '8px'
-                }}>
-                    <p style={{ 
-                        color: 'var(--chart-tooltip-text)',
-                        fontWeight: 'bold',
-                        marginBottom: '8px' 
-                    }}>
-                        {data.name}
-                    </p>
-                    <p style={{ color: 'var(--chart-tooltip-text)' }}>
-                        Coût: {data.capex.toLocaleString()} $/kW
+                <div className="chart-tooltip">
+                    <p className="chart-tooltip-label">{label}</p>
+                    <p className="chart-tooltip-value">
+                        {payload[0].name}: {payload[0].value} $/kW
                     </p>
                 </div>
             );
@@ -85,59 +45,63 @@ const EnergyTransitionDashboard = () => {
         return null;
     };
 
+    const InvestmentGapTooltip = ({ active, payload, label }) => {
+        if (active && payload && payload.length) {
+            const gap = payload[1].value - payload[0].value;
+            return (
+                <div className="chart-tooltip">
+                    <p className="chart-tooltip-label">{label}</p>
+                    <p className="chart-tooltip-value">Actuels : {payload[0].value.toFixed(1)} T$</p>
+                    <p className="chart-tooltip-value">Requis : {payload[1].value.toFixed(1)} T$</p>
+                    <p className="chart-tooltip-value">Écart : {gap.toFixed(1)} T$</p>
+                </div>
+            );
+        }
+        return null;
+    };
+
     return (
-        <div className="p-6 max-w-6xl mx-auto" style={{ backgroundColor: 'var(--entry)' }}>
-            <div className="flex justify-between items-center mb-6">
-                <h2 className="text-xl font-bold" style={{ color: 'var(--primary)' }}>
-                    Coûts de la Transition Énergétique
-                </h2>
+        <div className="dashboard-container">
+            <div className="dashboard-header">
+                <div className="dashboard-title">
+                    <h3>Tableau de bord d'analyse des prix</h3>
+                </div>
+            </div>
+
+            <div className="dashboard-buttons">
                 <button
                     onClick={() => setShowInfo(!showInfo)}
-                    style={{
-                        backgroundColor: showInfo ? 'var(--chart-button-bg-select)' : 'var(--chart-button-bg)',
-                        color: showInfo ? 'var(--chart-button-text-select)' : 'var(--chart-button-text)'
-                    }}
-                    className="px-4 py-2 rounded-md flex items-center"
+                    className={`dashboard-button ${showInfo ? 'selected' : ''}`}
                 >
-                    <span className="mr-2">ℹ️</span>
+                    <span>ℹ️</span>
                     Informations
                 </button>
             </div>
 
             {showInfo && (
-                <div className="mb-6 p-4 rounded-lg" style={{ 
-                    backgroundColor: 'var(--chart-annotation-bg)',
-                    color: 'var(--chart-annotation-text)',
-                    border: '1px solid var(--chart-annotation-line)'
-                }}>
-                    <p>Ce graphique présente les coûts d'investissement (CAPEX) par kilowatt de capacité 
-                    pour différentes technologies énergétiques. Les investissements requis pour la 
-                    transition énergétique sont estimés à 4T$ par an, alors que les investissements 
-                    actuels ne sont que de 1.8T$.</p>
+                <div className="dashboard-info">
+                    <p>
+                        Ce graphique présente les coûts d'investissement (CAPEX) par kilowatt de capacité 
+                        pour différentes technologies énergétiques. Les investissements requis pour la 
+                        transition énergétique sont estimés à 4T$ par an, alors que les investissements 
+                        actuels ne sont que de 1.8T$.
+                    </p>
                 </div>
             )}
 
-            <div className="mb-4 flex gap-2">
+            <div className="dashboard-buttons">
                 {['all', 'Fossile', 'Transition', 'Renouvelable', 'Bas carbone'].map(category => (
                     <button
                         key={category}
                         onClick={() => setSelectedCategory(category)}
-                        style={{
-                            backgroundColor: selectedCategory === category 
-                                ? 'var(--chart-button-bg-select)' 
-                                : 'var(--chart-button-bg)',
-                            color: selectedCategory === category
-                                ? 'var(--chart-button-text-select)'
-                                : 'var(--chart-button-text)'
-                        }}
-                        className="px-3 py-1 rounded-md"
+                        className={`dashboard-button ${selectedCategory === category ? 'selected' : ''}`}
                     >
                         {category === 'all' ? 'Toutes les technologies' : category}
                     </button>
                 ))}
             </div>
 
-            <div style={{ height: '500px' }}>
+            <div className="dashboard-chart-container h-96">
                 <ResponsiveContainer>
                     <BarChart
                         data={filteredData}
@@ -155,7 +119,7 @@ const EnergyTransitionDashboard = () => {
                             label={{ 
                                 value: 'Coût d\'investissement ($/kW)', 
                                 angle: -90, 
-                                position: 'insideLeft',
+                                position: 'left',
                                 fill: 'var(--chart-axis-label)'
                             }}
                             tick={{ fill: 'var(--chart-axis-label)' }}
@@ -170,12 +134,11 @@ const EnergyTransitionDashboard = () => {
                 </ResponsiveContainer>
             </div>
 
-            {/* Graphique des investissements */}
-            <div className="mt-6">
-                <h3 className="text-lg font-semibold mb-4" style={{ color: 'var(--primary)' }}>
+            <div className="dashboard-chart-container mt-6">
+                <h3 className="dashboard-subtitle">
                     Écart d'investissement 2024-2030
                 </h3>
-                <div style={{ height: '300px' }}>
+                <div className="h-64">
                     <ResponsiveContainer>
                         <LineChart
                             data={investmentGapData}
@@ -190,45 +153,13 @@ const EnergyTransitionDashboard = () => {
                                 label={{ 
                                     value: 'Investissements (T$)', 
                                     angle: -90, 
-                                    position: 'insideLeft',
+                                    position: 'middle',
                                     fill: 'var(--chart-axis-label)'
                                 }}
                                 tick={{ fill: 'var(--chart-axis-label)' }}
                                 domain={[0, 5]}
                             />
-                            <Tooltip 
-                                content={({ active, payload, label }) => {
-                                    if (active && payload && payload.length) {
-                                        const gap = payload[1].value - payload[0].value;
-                                        return (
-                                            <div style={{ 
-                                                backgroundColor: 'var(--chart-tooltip-bg)',
-                                                border: '1px solid var(--chart-tooltip-border)',
-                                                padding: '16px',
-                                                borderRadius: '8px'
-                                            }}>
-                                                <p style={{ 
-                                                    color: 'var(--chart-tooltip-text)',
-                                                    fontWeight: 'bold',
-                                                    marginBottom: '8px' 
-                                                }}>
-                                                    {label}
-                                                </p>
-                                                <p style={{ color: 'var(--chart-line-1)' }}>
-                                                    Actuels : {payload[0].value.toFixed(1)} T$
-                                                </p>
-                                                <p style={{ color: 'var(--chart-line-3)' }}>
-                                                    Requis : {payload[1].value.toFixed(1)} T$
-                                                </p>
-                                                <p style={{ color: 'var(--chart-tooltip-text)', marginTop: '8px' }}>
-                                                    Écart : {gap.toFixed(1)} T$
-                                                </p>
-                                            </div>
-                                        );
-                                    }
-                                    return null;
-                                }}
-                            />
+                            <Tooltip content={<InvestmentGapTooltip />} />
                             <Legend />
                             <Line 
                                 type="monotone" 
@@ -249,12 +180,12 @@ const EnergyTransitionDashboard = () => {
                         </LineChart>
                     </ResponsiveContainer>
                 </div>
-                <p className="text-sm mt-2" style={{ color: 'var(--secondary)' }}>
+                <p className="dashboard-info">
                     L'écart actuel de {(4.5 - 1.8).toFixed(1)} T$ doit être comblé pour atteindre l'objectif 2030.
                 </p>
             </div>
 
-            <p className="text-right mt-4" style={{ color: 'var(--secondary)' }}>
+            <p className="dashboard-source">
                 Source : Valayer & Wouters (2024), AIE World Energy Outlook
             </p>
         </div>

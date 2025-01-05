@@ -5,6 +5,7 @@ import PriceAnalysisDashboard from './components/PriceAnalysisDashboard';
 import CarbonBudgetDashboard from './components/CarbonBudgetDashboard';
 import TestDashboard from './components/TestDashboard';
 import InvestmentSimulator from './components/InvestmentSimulator';
+import GlobalTemperatureViz from './components/GlobalTemperatureViz';
 
 // Production debug helper
 const isProd = import.meta.env.PROD;
@@ -46,6 +47,9 @@ function mountReactComponents() {
           break;
         case 'InvestmentSimulator':
           component = <InvestmentSimulator {...props} />;
+          break;
+        case 'GlobalTemperatureViz':
+          component = <GlobalTemperatureViz {...props} />;
           break;
         default:
           console.warn(`Unknown component: ${componentName}`);

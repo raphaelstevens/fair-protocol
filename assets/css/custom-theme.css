@@ -28,10 +28,10 @@
     --chart-bg: var(--entry);
     --chart-title-text: var(--primary);
     --chart-subtitle-text: var(--secondary);
-    --chart-grid: #4A5568;
+    --chart-grid: var(--secondary);
 
     /* Axes */
-    --chart-axis: #718096;
+    --chart-axis: var(--secondary);
     --chart-axis-label: var(--primary);
 
     /* Lignes du graphique */
@@ -42,6 +42,84 @@
     --chart-line-5: #DAC04A;  
     --chart-line-6: #6473B3;  
     --chart-line-7: #9967C4;  
+
+  /* Variables de température numérotées de 1 à 75 */
+
+  --chart-temp-1: rgba(74, 144, 226, 0.82);  /* 1950 */
+  --chart-temp-2: rgba(74, 144, 226, 0.70);  /* 1951 */
+  --chart-temp-3: rgba(74, 144, 226, 0.65);  /* 1952 */
+  --chart-temp-4: rgba(74, 144, 226, 0.60);  /* 1953 */
+  --chart-temp-5: rgba(74, 144, 226, 0.74);  /* 1954 */
+  --chart-temp-6: rgba(74, 144, 226, 0.78);  /* 1955 */
+  --chart-temp-7: rgba(74, 144, 226, 0.82);  /* 1956 */
+  --chart-temp-8: rgba(74, 144, 226, 0.67);  /* 1957 */
+  --chart-temp-9: rgba(74, 144, 226, 0.66);  /* 1958 */
+  --chart-temp-10: rgba(74, 144, 226, 0.68); /* 1959 */
+  --chart-temp-11: rgba(74, 144, 226, 0.72); /* 1960 */
+  --chart-temp-12: rgba(74, 144, 226, 0.66); /* 1961 */
+  --chart-temp-13: rgba(74, 144, 226, 0.70); /* 1962 */
+  --chart-temp-14: rgba(74, 144, 226, 0.67); /* 1963 */
+  --chart-temp-15: rgba(74, 144, 226, 0.86); /* 1964 */
+  --chart-temp-16: rgba(74, 144, 226, 0.78); /* 1965 */
+  --chart-temp-17: rgba(74, 144, 226, 0.73); /* 1966 */
+  --chart-temp-18: rgba(74, 144, 226, 0.71); /* 1967 */
+  --chart-temp-19: rgba(74, 144, 226, 0.77); /* 1968 */
+  --chart-temp-20: rgba(74, 144, 226, 0.65); /* 1969 */
+  --chart-temp-21: rgba(74, 144, 226, 0.69); /* 1970 */
+  --chart-temp-22: rgba(74, 144, 226, 0.78); /* 1971 */
+  --chart-temp-23: rgba(74, 144, 226, 0.70); /* 1972 */
+  --chart-temp-24: rgba(74, 144, 226, 0.60); /* 1973 */
+  --chart-temp-25: rgba(74, 144, 226, 0.75); /* 1974 */
+  --chart-temp-26: rgba(74, 144, 226, 0.70); /* 1975 */
+  --chart-temp-27: rgba(74, 144, 226, 0.78); /* 1976 */
+  --chart-temp-28: rgba(74, 144, 226, 0.53); /* 1977 */
+  --chart-temp-29: rgba(74, 144, 226, 0.62); /* 1978 */
+  --chart-temp-30: rgba(74, 144, 226, 0.57); /* 1979 */
+  --chart-temp-31: rgba(74, 144, 226, 0.48); /* 1980 */
+  --chart-temp-32: rgba(74, 144, 226, 0.44); /* 1981 */
+  --chart-temp-33: rgba(74, 144, 226, 0.60); /* 1982 */
+  --chart-temp-34: rgba(74, 144, 226, 0.47); /* 1983 */
+  --chart-temp-35: rgba(74, 144, 226, 0.59); /* 1984 */
+  --chart-temp-36: rgba(74, 144, 226, 0.59); /* 1985 */
+  --chart-temp-37: rgba(74, 144, 226, 0.55); /* 1986 */
+  --chart-temp-38: rgba(74, 144, 226, 0.45); /* 1987 */
+  --chart-temp-39: rgba(74, 144, 226, 0.42); /* 1988 */
+  --chart-temp-40: rgba(74, 144, 226, 0.50); /* 1989 */
+  --chart-temp-41: rgba(74, 144, 226, 0.36); /* 1990 */
+  --chart-temp-42: rgba(74, 144, 226, 0.37); /* 1991 */
+  --chart-temp-43: rgba(74, 144, 226, 0.52); /* 1992 */
+  --chart-temp-44: rgba(74, 144, 226, 0.48); /* 1993 */
+  --chart-temp-45: rgba(74, 144, 226, 0.45); /* 1994 */
+  --chart-temp-46: rgba(74, 144, 226, 0.33); /* 1995 */
+  --chart-temp-47: rgba(74, 144, 226, 0.41); /* 1996 */
+  --chart-temp-48: rgba(74, 144, 226, 0.31); /* 1997 */
+  --chart-temp-49: rgba(74, 144, 226, 0.20); /* 1998 */
+  --chart-temp-50: rgba(74, 144, 226, 0.38); /* 1999 */
+  --chart-temp-51: rgba(74, 144, 226, 0.38); /* 2000 */
+  --chart-temp-52: rgba(74, 144, 226, 0.28); /* 2001 */
+  --chart-temp-53: rgba(74, 144, 226, 0.21); /* 2002 */
+  --chart-temp-54: rgba(74, 144, 226, 0.22); /* 2003 */
+  --chart-temp-55: rgba(74, 144, 226, 0.29); /* 2004 */
+  --chart-temp-56: rgba(74, 144, 226, 0.17); /* 2005 */
+  --chart-temp-57: rgba(74, 144, 226, 0.21); /* 2006 */
+  --chart-temp-58: rgba(74, 144, 226, 0.20); /* 2007 */
+  --chart-temp-59: rgba(74, 144, 226, 0.29); /* 2008 */
+  --chart-temp-60: rgba(74, 144, 226, 0.19); /* 2009 */
+  --chart-temp-61: rgba(74, 144, 226, 0.14); /* 2010 */
+  --chart-temp-62: rgba(74, 144, 226, 0.22); /* 2011 */
+  --chart-temp-63: rgba(74, 144, 226, 0.21); /* 2012 */
+  --chart-temp-64: rgba(74, 144, 226, 0.19); /* 2013 */
+  --chart-temp-65: rgba(74, 144, 226, 0.14); /* 2014 */
+  --chart-temp-66: rgba(74, 144, 226, 0.03); /* 2015 */
+  --chart-temp-67: rgba(74, 144, 226, 0.00); /* 2016 */
+  --chart-temp-68: rgba(74, 144, 226, 0.10); /* 2017 */
+  --chart-temp-69: rgba(74, 144, 226, 0.15); /* 2018 */
+  --chart-temp-70: rgba(74, 144, 226, 0.06); /* 2019 */
+  --chart-temp-71: rgba(74, 144, 226, 0.05); /* 2020 */
+  --chart-temp-72: rgba(74, 144, 226, 0.14); /* 2021 */
+  --chart-temp-73: rgba(74, 144, 226, 0.10); /* 2022 estimé */
+  --chart-temp-74: rgba(74, 144, 226, 0.05); /* 2023 estimé */
+  --chart-temp-75: rgba(74, 144, 226, 0.15); /* 2024 estimé */
 
     /* Tooltip */
     --chart-tooltip-bg: var(--theme);
@@ -91,10 +169,10 @@
     --chart-bg: var(--entry);
     --chart-title-text: var(--primary);
     --chart-subtitle-text: var(--secondary);
-    --chart-grid: #374151;
+    --chart-grid: var(--secondary);
 
     /* Axes */
-    --chart-axis: #9CA3AF;
+    --chart-axis: var(--secondary);
     --chart-axis-label: var(--primary);
 
     /* Lignes du graphique */
@@ -105,6 +183,22 @@
     --chart-line-5: #E2C94D;  
     --chart-line-6: #7681C7;  
     --chart-line-7: #A47DCB;  
+
+    --chart-temp-1: rgba(91, 164, 216, 0.4); /* Bleu information */
+    --chart-temp-2: rgba(91, 164, 216, 0.3); /* Bleu information */
+    --chart-temp-3: rgba(91, 164, 216, 0.5); /* Bleu information */
+    --chart-temp-4: rgba(91, 164, 216, 0.5); /* Bleu information */
+    --chart-temp-5: rgba(91, 164, 216, 0.5); /* Bleu information */
+    --chart-temp-6: rgba(91, 164, 216, 0.5); /* Bleu information */
+    --chart-temp-7: rgba(91, 164, 216, 0.5); /* Bleu information */
+    --chart-temp-8: rgba(91, 164, 216, 0.5); /* Bleu information */
+    --chart-temp-9: rgba(91, 164, 216, 0.5); /* Bleu information */
+    --chart-temp-10: rgba(229, 115, 115, 0.5); /* Rouge challenge/alerte */
+    --chart-temp-11: rgba(229, 115, 115;); /* Rouge challenge/alerte */
+
+
+
+
 
     /* Tooltip */
     --chart-tooltip-bg: var(--entry);
@@ -125,7 +219,7 @@
 
 
 ul {
-    list-style-type: upper-roman; /* Change bullet shape */
+    list-style-type: disc; /* Change bullet shape */
     margin-left: 20px;      /* Adjust indentation */
 }
 

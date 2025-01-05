@@ -33,7 +33,7 @@ The transition to clean energy requires investments of $4 trillion annually by 2
 
 Without proactive transition planning, up to 40% of fossil fuel assets risk becoming stranded as climate regulations tighten. This represents a major financial stability risk that could trigger severe economic disruption if not managed systematically.
 
-[Understand stranded assets](en//challenge/stranded-risks) &rarr;
+[Understand stranded assets](/en/challenge/stranded-risks) &rarr;
 
 {{< /section >}}
 

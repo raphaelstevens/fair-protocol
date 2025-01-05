@@ -30,20 +30,14 @@ const CarbonBudgetChart = () => {
     if (active && payload && payload.length) {
       const entry = payload[0].payload;
       return (
-        <div style={{
-          backgroundColor: 'var(--chart-tooltip-bg)',
-          color: 'var(--chart-tooltip-text)',
-          border: `1px solid var(--chart-tooltip-border)`,
-          padding: '1rem',
-          borderRadius: '0.375rem'
-        }}>
-          <p className="font-semibold mb-1">
+        <div className="chart-tooltip">
+          <p className="chart-tooltip-label">
             {entry.name}: {entry.value} Gt CO₂
           </p>
           {showCoal && entry.value === 4070 && (
             <div className="mt-2">
-              <div style={{ color: 'var(--chart-line-1)' }}>Oil & Gas: 1000 Gt CO₂</div>
-              <div style={{ color: 'var(--chart-line-2)' }}>Coal: 3070 Gt CO₂</div>
+              <div className="chart-tooltip-value">Oil & Gas: 1000 Gt CO₂</div>
+              <div className="chart-tooltip-value">Coal: 3070 Gt CO₂</div>
             </div>
           )}
         </div>
@@ -52,51 +46,25 @@ const CarbonBudgetChart = () => {
     return null;
   };
 
-  return (
-    <div className="p-6 w-full" style={{ backgroundColor: 'var(--theme)' }}>
-      <div className="flex justify-between items-center mb-6">
-        <h1 className="text-sm font-bold" style={{ color: 'var(--primary)' }}>
-          Carbon Budget vs Fossil Fuel Reserves
-        </h1>
-<button
-  onClick={() => setShowCoal(!showCoal)}
-  style={{
-    backgroundColor: 'var(--chart-button-bg)',
-    color: 'var(--chart-button-text)',
-    padding: '8px 12px', // Plus grand padding pour un vrai bouton
-    borderRadius: '3px', // Coins arrondis
-    marginRight: '24px',
-    marginTop: '2px',
-    marginBottom: '22px',
-    cursor: 'pointer', // Curseur clic
-    transition: 'all 0.3s ease', // Transition pour hover/clic
-  }}
-  onMouseOver={(e) => {
-    e.currentTarget.style.opacity = '0.8'; // Hover
-  }}
-  onMouseOut={(e) => {
-    e.currentTarget.style.opacity = '1'; // Retour normal
-  }}
-  onMouseDown={(e) => {
-    e.currentTarget.style.backgroundColor = 'var(--chart-button-bg)'; // Couleur au clic
-    e.currentTarget.style.color = 'var(--chart-button-text)'; // Texte inversé
-  }}
-  onMouseUp={(e) => {
-    e.currentTarget.style.backgroundColor = 'var(--chart-button-bg-select)'; // Retour couleur normale
-    e.currentTarget.style.color = 'var(--chart-button-text-select)'; // Texte normal
-  }}
-  className="flex items-center gap-2 rounded-lg"
->
-  {showCoal ? "⊖ Hide Coal Reserves" : "⊕ Add Coal Reserves"}
-</button>
-
+    return (
+        <div className="dashboard-container">
+            <div className="dashboard-header">
+                <div className="dashboard-title">
+                    <h3>Carbon Budget</h3>
+                </div>
+            </div>
+            <div className="dashboard-buttons">
+        <button
+          onClick={() => setShowCoal(!showCoal)}
+          className={`dashboard-button ${showCoal ? 'selected' : ''}`}
+        >
+          {showCoal ? "⊖ Hide Coal Reserves" : "⊕ Add Coal Reserves"}
+        </button>
       </div>
+
+  
       
-      <div style={{ 
-        backgroundColor: 'var(--chart-bg)',
-        height: '400px',
-        borderRadius: '3px',
-      }} className="p-6 rounded-lg">
+      <div className="dashboard-chart-container h-96 p-6">
         <ResponsiveContainer>
           <BarChart
             data={data}
@@ -132,7 +100,7 @@ const CarbonBudgetChart = () => {
                   return 'var(--chart-line-2)';
                 }
                 return entry.name === 'Safe Climate Budget' 
-                  ? 'var(--icon-solution)' 
+                  ? 'var(--chart-line-1)' 
                   : 'var(--chart-line-2)';
               }}
               radius={[0, 4, 4, 0]}
@@ -141,7 +109,7 @@ const CarbonBudgetChart = () => {
         </ResponsiveContainer>
       </div>
       
-      <p className="text-right mt-4" style={{ color: 'var(--secondary)' }}>
+      <p className="dashboard-source">
         Source: Industry reports and IPCC carbon budget estimates, 2024
       </p>
     </div>
