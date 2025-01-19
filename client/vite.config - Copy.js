@@ -6,14 +6,28 @@ export default defineConfig({
   plugins: [react()],
   define: {
     'global': 'globalThis',
-    'process.env.NODE_ENV': JSON.stringify('production')
+    'process': {
+      'env': {
+        'NODE_ENV': JSON.stringify('production')
+      }
+    }
   },
   build: {
     outDir: '../static/dist',
     emptyOutDir: true,
+    lib: {
+      entry: resolve(__dirname, 'src/main.jsx'),
+      name: 'FairProtocol',
+      formats: ['es'],
+      fileName: 'fair-protocol'
+    },
     rollupOptions: {
-      input: {
-        main: resolve(__dirname, 'src/main.jsx')
+      external: ['react', 'react-dom'],
+      output: {
+        globals: {
+          react: 'React',
+          'react-dom': 'ReactDOM'
+        }
       }
     }
   },
