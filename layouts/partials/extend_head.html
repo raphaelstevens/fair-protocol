@@ -1,7 +1,3 @@
-{{/* layouts/partials/extend_head.html */}}
-{{- $customCSS := resources.Get "css/custom-theme.css" | minify -}}
-<link rel="stylesheet" href="{{ $customCSS.Permalink }}">
-
 {{ if hugo.IsServer }}
   <!-- Development -->
   <script>
@@ -17,13 +13,7 @@
   <script type="module" src="http://localhost:5173/src/main.jsx"></script>
 {{ else }}
   <!-- Production -->
-  <script type="importmap">
-  {
-    "imports": {
-      "react": "https://esm.sh/react@18",
-      "react-dom": "https://esm.sh/react-dom@18"
-    }
-  }
-  </script>
-  <script type="module" src="/dist/fair-protocol.js"></script>
+  <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+  <script src="/dist/fair-protocol.js"></script>
 {{ end }}
